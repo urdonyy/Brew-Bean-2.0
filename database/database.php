@@ -29,12 +29,12 @@ class Database {
 
     // Get distinct categories (Hot Coffe, Cold Coffe, Non-Coffe)
     public function getCategories() {
-        return $this->conn->query("SELECT DISTINCT product_id FROM products");
+        return $this->conn->query("SELECT DISTINCT category FROM products");
     }
 
     // Get products by category
     public function getProductsByCategory($category) {
-        $stmt = $this->conn->prepare("SELECT product_name, price FROM products WHERE product_id = ?");
+        $stmt = $this->conn->prepare("SELECT product_name, price, image_filename FROM products WHERE category = ?");
         $stmt->bind_param("s", $category); // "s" because product_id is VARCHAR in your DB
         $stmt->execute();
         return $stmt->get_result();

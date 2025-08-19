@@ -1,21 +1,6 @@
 <?php
-require_once("../database/database.php");
+require_once("../src/controller/controller.php");
 
-$db = new Database();
-
-// Get all categories
-$categories = $db->getCategories();
-
-// If category is selected
-$selectedCategory = isset($_GET['category']) ? $_GET['category'] : null;
-
-if ($selectedCategory === "all") {
-    $products = $db->getProducts(); // get all products
-} elseif ($selectedCategory) {
-    $products = $db->getProductsByCategory($selectedCategory);
-} else {
-    $products = null;
-}
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +18,8 @@ if ($selectedCategory === "all") {
 <a class="header" href="?category=all">All Products</a>
 
 <?php while($cat = $categories->fetch_assoc()): ?>
-    <a class="header" href="?category=<?php echo urlencode($cat['product_id']); ?>">
-        <?php echo $cat['product_id']; ?>
+    <a class="header" href="?category=<?php echo urlencode($cat['category']); ?>">
+        <?php echo $cat['category']; ?>
     </a>
 <?php endwhile; ?>
 
@@ -50,9 +35,9 @@ if ($selectedCategory === "all") {
     <div class="card-container">
         <?php while($prod = $products->fetch_assoc()): ?>
             <div class="card">
+            <img src="assets/images/<?php echo htmlspecialchars($prod['image_filename']); ?>" alt="picture"  width="150" height="150">
                 <h4><?php echo htmlspecialchars($prod['product_name']); ?></h4>
                 <p>₱<?php echo number_format($prod['price'], 2); ?></p>
-                <!-- img src="public/$prod['image_name'] == loy.jpg" -->
             </div>
         <?php endwhile; ?>
     </div>
