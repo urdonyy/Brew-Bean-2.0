@@ -23,55 +23,7 @@ if ($selectedCategory === "all") {
 <head>
     <meta charset="UTF-8">
     <title>Product Menu</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .header {
-            margin: 5px;
-            padding: 10px 20px;
-            display: inline-block;
-            background: #eee;
-            border-radius: 5px;
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-        }
-        .header:hover {
-            background: #ccc;
-        }
-        /* Container for cards */
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        /* Individual card */
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            padding: 15px;
-            width: 200px;
-            background: #fff;
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .card h4 {
-            margin: 0 0 10px;
-            font-size: 18px;
-            color: #333;
-        }
-        .card p {
-            margin: 0;
-            font-size: 16px;
-            font-weight: bold;
-            color: #007BFF;
-        }
-    </style>
+    <link rel="stylesheet" href="../src/styles/addCart.css">
 </head>
 <body>
 
