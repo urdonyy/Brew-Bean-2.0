@@ -1,0 +1,164 @@
+ /* root for CSS variables */
+:root {
+  --primary-color: #4E3232; 
+  --secondary-color: #FFFCFB; 
+}
+
+/* general styles/base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nata Sans";
+  background-color: var(--secondary-color);
+}
+
+.sideBar {
+  width: 200px;
+  height: 100dvh;
+  background-color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid black;
+  padding: 20px 0;
+}
+
+.logo {
+  font-size: 32px;
+  font: "Playfair Display";
+  width: 200px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 40px;
+  padding: 10px;
+}
+
+.sideBarNav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sideBarNav ul li a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #000;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 0 8px 8px 0;
+  text-align: center;
+  align-self: baseline;
+  text-decoration: none;
+}
+
+.sideBarNav ul li:not(:last-of-type) a {
+  border-bottom: none;
+}
+
+.sideBarNav ul li:last-of-type a {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.sideBarNav ul li a:hover {
+  color: #fff;
+  background-color: var(--primary-color);
+}
+
+.sideBarNav ul li:not(:last-of-type) a:hover svg path {
+  fill: white;
+}
+
+.sideBar .sideBarNav ul li a.active {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  width: 100%;
+  border-radius: 10px;
+}
+
+.searchBar form {
+  display: flex;
+  align-items: center;
+}
+
+.searchBar form input,
+.searchBar form button {
+  height: 40px;
+}
+
+.searchBar form input {
+  padding: 8px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  border-right: none;
+}
+
+.searchBar form input::placeholder {
+  color: #cdcdcd;
+}
+
+.searchBar form button {
+  padding: 0 10px;
+  border-radius: 0 5px 5px 0;
+  background-color: var(--primary-color);
+  color: #fff;
+}
+.content {
+  margin-right: 320px;
+  padding: 20px;
+}
+
+.inventory {
+  margin: 20px;
+}
+
+/* Layout styles */
+.main-container {
+  display: flex;
+}
+
+.main-content {
+  flex: 1 1 auto;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stocks {
+  width: 100%;
+  border-spacing: 0;
+  text-align: center;
+}
+
+.stocks th {
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  padding: 6px;
+}
+
+.stocks th:first-of-type {
+  border-left: 1px solid #000;
+  border-radius: 8px 0 0 8px;
+}
+
+.stocks th:last-of-type {
+  border-right: 1px solid #000;
+  border-radius: 0 4px 4px 0;
+}
+
+.stocks td {
+  border-bottom: 1px solid #000;
+  padding: 8px;
+}
