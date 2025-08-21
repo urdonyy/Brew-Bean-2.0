@@ -64,24 +64,30 @@ class Database {
 
     // INVENTORY - Function for adding a product (CREATE-R-U-D)
     
-    public function addProduct ($post){
-        
-        // need to test pa toh huuhu
-        if (empty($post['product_name']) || empty($post['image_name']) || empty($post['price']) || empty($post['category'])) {
+    public function addProduct($post) {
+        if (
+            empty($post['product_name']) ||
+            empty($post['image_filename']) ||
+            empty($post['price']) ||
+            empty($post['category'])
+        ) {
             return false; 
         }
-        $product_name = $this->conn->real_escape_string( $post['product_name']);
-        $image_filename = $this->conn->real_escape_string( $post['image_filename']);
-        $price = $this->conn->real_escape_string( $post['price']);
-        $category = $this->conn->real_escape_string( $post['category']);
-        $stmt = $this->conn->prepare("INSERT INTO products (product_name, image_filename, price, category) VALUES (?,?,?,?)");
+        $product_name = $this->conn->real_escape_string($post['product_name']);
+        $image_filename = $this->conn->real_escape_string($post['image_filename']);
+        $price = $this->conn->real_escape_string($post['price']);
+        $category = $this->conn->real_escape_string($post['category']);
 
-        if ($stmt === false){
+        $stmt = $this->conn->prepare(
+            "INSERT INTO products (product_name, image_filename, price, category) VALUES (?, ?, ?, ?)"
+        );
+        if ($stmt === false) {
             return false;
         }
-        $stmt->bind_param("ssis", $product_name, $image_filename, $price, $category);
-        $stmt->execute();
-
+        $stmt->bind_param("ssds", $product_name, $image_filename, $price, $category);
+        $success = $stmt->execute();
+        $stmt->close();
+        return $success;
     }
     // INVENTORY - Function for deleting the product (C-R-U-DELETE)
     // INVENTORY - Function for updating the product (C-R-UPDATE-D)
