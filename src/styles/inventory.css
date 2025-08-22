@@ -1,0 +1,112 @@
+.main-content {
+  flex: 1 1 auto;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-left: 430px;
+  margin-right: 61px;
+
+}
+
+.pageHeader {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addButton button{
+  padding: 6px 8px 6px 8px;
+  background-color: #F3DEC3;
+  border: none;
+  border-radius: 8px;
+  width: 130px;
+  cursor: pointer;
+}
+
+/* .main-content,
+.pageHeader {
+  flex: 1 1 auto;
+  display: flex;
+} */
+
+.searchBar form {
+  display: flex;
+  align-items: center;
+}
+
+.searchBar form input,
+.searchBar form button {
+  height: 40px;
+}
+
+.searchBar form input {
+  padding: 8px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  border-right: none;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+
+.searchBar form input::placeholder {
+  color: #cdcdcd;
+}
+
+.searchBar form button {
+  padding: 0 10px;
+  border-radius: 0 5px 5px 0;
+  background-color: var(--primary-color);
+  color: #fff;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+}
+.content {
+  margin-right: 320px;
+  padding: 20px;
+}
+
+.inventory {
+  margin: 20px;
+}
+
+/* Layout styles */
+/* .main-container {
+  display: flex;
+} */
+
+.stocks {
+  width: 100%;
+  border-spacing: 0;
+  text-align: center;
+}
+
+.stocks th {
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  padding: 6px;
+}
+
+.stocks th:first-of-type {
+  border-left: 1px solid #000;
+  border-radius: 15px 0 0 15px;
+}
+
+/* .stocks th:first-of-type {
+  align-content: start;
+}
+
+.stocks td :first-of-type {
+  align-content: flex-start;
+} */
+
+.stocks th:last-of-type {
+  border-right: 1px solid #000;
+  border-radius: 0 15px 15px 0;
+}
+
+.stocks td {
+  border-bottom: 1px solid #000;
+  padding: 8px;
+}
