@@ -1,75 +1,35 @@
-
-/* general styles/base */
-
-body {
-  font-family: "Nata Sans";
-  background-color: var(--secondary-color);
-}
-
-.sideBar {
-  width: 200px;
-  height: 100dvh;
-  background-color: var(--secondary-color);
+.main-content {
+  flex: 1 1 auto;
+  padding: 40px;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid black;
-  padding: 20px 0;
+  gap: 24px;
+  margin-left: 430px;
+  margin-right: 61px;
+
 }
 
-.logo {
-  font-size: 32px;
-  font: "Playfair Display";
-  width: 200px;
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 40px;
-  padding: 10px;
-}
-
-.sideBarNav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
-.sideBarNav ul li a {
+.pageHeader {
   display: flex;
+  flex: 1 1 auto;
+  justify-content: space-between;
   align-items: center;
-  gap: 6px;
-  color: #000;
-  padding: 20px;
-  border: 1px solid black;
-  border-radius: 0 8px 8px 0;
-  text-align: center;
-  align-self: baseline;
-  text-decoration: none;
 }
 
-.sideBarNav ul li:not(:last-of-type) a {
-  border-bottom: none;
+.addButton button{
+  padding: 6px 8px 6px 8px;
+  background-color: #F3DEC3;
+  border: none;
+  border-radius: 8px;
+  width: 130px;
+  cursor: pointer;
 }
 
-.sideBarNav ul li:last-of-type a {
-  background-color: var(--primary-color);
-  color: #fff;
-}
-
-.sideBarNav ul li a:hover {
-  color: #fff;
-  background-color: var(--primary-color);
-}
-
-.sideBarNav ul li:not(:last-of-type) a:hover svg path {
-  fill: white;
-}
-
-.sideBar .sideBarNav ul li a.active {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  width: 100%;
-  border-radius: 10px;
-}
+/* .main-content,
+.pageHeader {
+  flex: 1 1 auto;
+  display: flex;
+} */
 
 .searchBar form {
   display: flex;
@@ -86,6 +46,8 @@ body {
   border-radius: 5px 0 0 5px;
   outline: none;
   border-right: none;
+  border-top: 1px solid;
+  border-left: 1px solid;
 }
 
 .searchBar form input::placeholder {
@@ -97,6 +59,8 @@ body {
   border-radius: 0 5px 5px 0;
   background-color: var(--primary-color);
   color: #fff;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
 }
 .content {
   margin-right: 320px;
@@ -108,23 +72,9 @@ body {
 }
 
 /* Layout styles */
-.main-container {
+/* .main-container {
   display: flex;
-}
-
-.main-content {
-  flex: 1 1 auto;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+} */
 
 .stocks {
   width: 100%;
@@ -140,12 +90,20 @@ body {
 
 .stocks th:first-of-type {
   border-left: 1px solid #000;
-  border-radius: 8px 0 0 8px;
+  border-radius: 15px 0 0 15px;
 }
+
+/* .stocks th:first-of-type {
+  align-content: start;
+}
+
+.stocks td :first-of-type {
+  align-content: flex-start;
+} */
 
 .stocks th:last-of-type {
   border-right: 1px solid #000;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 15px 15px 0;
 }
 
 .stocks td {
