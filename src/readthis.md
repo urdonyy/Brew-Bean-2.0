@@ -70,7 +70,7 @@ It allows adding items from forms and rendering them on the page.
     renderCart();
 </script>
 ```
-
+--Commit
 ## Modified Code
 ``` html
 <form class="addtocartForm" method="POST">
