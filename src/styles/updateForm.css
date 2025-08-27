@@ -211,12 +211,26 @@ h2 {
     margin-top: 18px;
 }
 
-.right-div .cancel {
+.right-div .btns .cancel:hover {
+    cursor: pointer;
     background: #FF4848;
+    color: #fff;
     border: 1px solid #FF4848;
+}
+
+.right-div .btns .confirm:hover {
+    cursor: pointer;
+    background: #03d46b;
+    color: #fff;
+    border: 1px solid #03d46b;
+}
+
+.right-div .cancel {
+    background: #f9f8f5;
+    border: 1px solid var(--tertiary-color);
     border-radius: 8px;
     width: 100%;
-    color: #fff;
+    color: var(--tertiary-color);
     font-weight: 500;
     font-size: 16px;
     padding: 5px 29px 5px 29px;
@@ -255,7 +269,7 @@ h2 {
 }
 
 .backH a:hover svg path {
-    fill: red;
+    fill: var(--secondary-color);
     transition: .2s ease-in-out;
     cursor: pointer;
 }
