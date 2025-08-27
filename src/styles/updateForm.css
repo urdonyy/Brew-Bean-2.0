@@ -2,16 +2,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Nata+Sans:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Slackey&display=swap');
 
 .container {
-    margin-left: 16vw;
-    width: calc(100% - 16vw);
+    /* margin-left: 16vw; do not remove*/
+    /* width: calc(100% - 16vw); do not remove*/
+    width: 100%;
     /* min-height: 100vh; */
     padding: 20px;
     display: flex;
+    justify-content: center;
+    /* palatandaan ni haruna */
     box-sizing: border-box;
 }
 
 .update-container {
     /* box-sizing: border-box; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    margin-top: 12px;
+    gap: 32px;
+    padding-left: 40px;
+}
+
+.add-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -228,4 +241,37 @@ h2 {
 
 .form-box.active {
     display: block;
+}
+
+.backH {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.backH a {
+    text-decoration: none;
+}
+
+.backH a:hover svg path {
+    fill: red;
+    transition: .2s ease-in-out;
+    cursor: pointer;
+}
+
+.backH a svg path {
+    fill: #39261F;
+}
+
+.backH h1 {
+    margin-bottom: 10px;
+}
+
+.backH {
+    position: relative;
+}
+
+.backH svg path {
+    position: absolute;
 }
