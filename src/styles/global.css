@@ -4,6 +4,7 @@
     /* --primary-color: #ff8533; */
     --primary-color: #4E3232;
     --secondary-color: #006633;
+    --tertiary-color: #39261F;
 }
 
 * {
@@ -44,7 +45,7 @@ body {
 /* div ng buong nav */
 .navbar {
     background: #FFFCFB;
-    width: 22vw;
+    width: 16vw;
     height: 100vh;
     position: fixed;
     top: 0;
@@ -61,10 +62,10 @@ body {
 
 .nav ul li {
     padding: 20px 30px 20px;
-    border: 1px solid #f9f8f5;
+    border: 1px solid #FFFCFB;
     border-left: none;
     border-radius: 0px 10px 10px 0px;
-    background: #f9f8f5;
+    background: #FFFCFB;
     color: black;
 }
 

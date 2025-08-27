@@ -34,6 +34,14 @@ $icons = [
                                     </svg>'
     ]
 ];
+
+/* :if no category is set in the URL, redirect to the default "all" category
+   :so the controller can load and the view shows "All Coffee" by default.
+   :a relative query that allows us to stay on the same page but with the category set*/
+if (!isset($_GET['category']) || $_GET['category'] === '') {
+    header('Location: ?category=all');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -60,34 +68,44 @@ $icons = [
             <!--products section-->
             <div class="product-content">
 
+
                 <div class="category">
-                    <div class="category_header">
-                        <a class="header<?php echo (isset($_GET['category']) && $_GET['category'] === 'all') ? ' active' : ''; ?>"
-                            href="?category=all">
+                    <div class="stickyHeader">
+                        <div class="category_header">
+                            <a class="header<?php echo (isset($_GET['category']) && $_GET['category'] === 'all') ? ' active' : ''; ?>"
+                                href="?category=all">
 
-                            <svg viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0.490234 16.4539V0.595215H2.25231V16.4539H0.490234ZM4.01438 10.2866C4.01438 10.053 4.10721 9.82887 4.27243 9.66364C4.43766 9.49841 4.66176 9.40559 4.89542 9.40559H11.9437C12.1774 9.40559 12.4015 9.49841 12.5667 9.66364C12.7319 9.82887 12.8248 10.053 12.8248 10.2866V14.6918C12.8248 14.9255 12.7319 15.1496 12.5667 15.3148C12.4015 15.48 12.1774 15.5729 11.9437 15.5729H4.89542C4.66176 15.5729 4.43766 15.48 4.27243 15.3148C4.10721 15.1496 4.01438 14.9255 4.01438 14.6918V10.2866ZM4.89542 1.47625C4.66176 1.47625 4.43766 1.56908 4.27243 1.7343C4.10721 1.89953 4.01438 2.12362 4.01438 2.35729V6.76248C4.01438 6.99614 4.10721 7.22024 4.27243 7.38546C4.43766 7.55069 4.66176 7.64351 4.89542 7.64351H15.4679C15.7015 7.64351 15.9256 7.55069 16.0909 7.38546C16.2561 7.22024 16.3489 6.99614 16.3489 6.76248V2.35729C16.3489 2.12362 16.2561 1.89953 16.0909 1.7343C15.9256 1.56908 15.7015 1.47625 15.4679 1.47625H4.89542Z"
-                                    fill="currentColor" />
-                            </svg>
+                                <svg viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M0.490234 16.4539V0.595215H2.25231V16.4539H0.490234ZM4.01438 10.2866C4.01438 10.053 4.10721 9.82887 4.27243 9.66364C4.43766 9.49841 4.66176 9.40559 4.89542 9.40559H11.9437C12.1774 9.40559 12.4015 9.49841 12.5667 9.66364C12.7319 9.82887 12.8248 10.053 12.8248 10.2866V14.6918C12.8248 14.9255 12.7319 15.1496 12.5667 15.3148C12.4015 15.48 12.1774 15.5729 11.9437 15.5729H4.89542C4.66176 15.5729 4.43766 15.48 4.27243 15.3148C4.10721 15.1496 4.01438 14.9255 4.01438 14.6918V10.2866ZM4.89542 1.47625C4.66176 1.47625 4.43766 1.56908 4.27243 1.7343C4.10721 1.89953 4.01438 2.12362 4.01438 2.35729V6.76248C4.01438 6.99614 4.10721 7.22024 4.27243 7.38546C4.43766 7.55069 4.66176 7.64351 4.89542 7.64351H15.4679C15.7015 7.64351 15.9256 7.55069 16.0909 7.38546C16.2561 7.22024 16.3489 6.99614 16.3489 6.76248V2.35729C16.3489 2.12362 16.2561 1.89953 16.0909 1.7343C15.9256 1.56908 15.7015 1.47625 15.4679 1.47625H4.89542Z"
+                                        fill="currentColor" />
+                                </svg>
 
-                            All Coffee
-                        </a>
-
-                        <?php while ($cat = $categories->fetch_assoc()): ?>
-                            <?php
-                            $categoryName = $cat['category'];
-                            $icon = $icons[$categoryName]['svg'] ?? '';
-                            ?>
-
-                            <a class="header<?php echo (isset($_GET['category']) && $_GET['category'] === $categoryName) ? ' active' : ''; ?>"
-                                href="?category=<?php echo urlencode($categoryName); ?>">
-                                <?php echo $icon; ?>
-                                <?php echo htmlspecialchars($categoryName); ?>
+                                All Coffee
                             </a>
-                        <?php endwhile; ?>
 
+                            <?php while ($cat = $categories->fetch_assoc()): ?>
+                                <?php
+                                $categoryName = $cat['category'];
+                                $icon = $icons[$categoryName]['svg'] ?? '';
+                                ?>
+
+                                <a class="header<?php echo (isset($_GET['category']) && $_GET['category'] === $categoryName) ? ' active' : ''; ?>"
+                                    href="?category=<?php echo urlencode($categoryName); ?>">
+                                    <?php echo $icon; ?>
+                                    <?php echo htmlspecialchars($categoryName); ?>
+                                </a>
+                            <?php endwhile; ?>
+
+                        </div>
+                        <!-- <div class="search-container"> -->
+                        <div class="searchProduct">
+                            <input type="text" id="search-product" name="search" placeholder="Search all products">
+                            <button>Search</button>
+                        </div>
+                        <!-- </div> -->
                     </div>
+
 
                     <?php if (isset($_GET['category'])): ?>
 
@@ -102,7 +120,8 @@ $icons = [
                                         <h4><?php echo htmlspecialchars($prod['product_name']); ?></h4>
                                         <p>₱<?php echo number_format($prod['price'], 2); ?></p>
                                     </div> -->
-
+                                    
+                                    <!-- data-id="<?= $prod['id']; ?>" -->
                                     <div class="card">
                                         <div class="item-description">
                                             <img src="assets/images/<?php echo htmlspecialchars($prod['image_filename']); ?>"
@@ -115,54 +134,69 @@ $icons = [
                                         </div>
 
                                         <form action="" method="POST">
-                                            <div class="item-properties">
-                                                <div class="item-properties-card">
-                                                    <p class="title">
-                                                        Size
-                                                    </p>
-                                                    <div class="ip-variety">
-                                                        <input type="" name="small" placeholder="S" value="S" />
+                                        <div class="item-properties">
+                                            <div class="item-properties-card">
+                                                <p class="title">
+                                                    Size
+                                                </p>
+                                                <div class="ip-variety">
+                                                    <input type="" name="small" placeholder="S" value="S" />
                                                         <input type="" name="medium" placeholder="M" value="M" />
                                                         <input type="" name="large" placeholder="L" value="L" />
-                                                    </div>
+                                                        <!-- <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'S', 25)">S</button>
+                                                        <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'M', 50)">M</button>
+                                                        <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'L', 100)">L</button> -->
+                                                    <!-- <button type="button" data-value="S">S</button>
+                                                    <button type="button" data-value="M">M</button>
+                                                    <button type="button" data-value="L">L</button> -->
                                                 </div>
+                                            </div>
 
-                                                <div class="item-properties-card">
-                                                    <p class="title">
-                                                        Sugar (%)
-                                                    </p>
-                                                    <div class="ip-variety">
-                                                        <input type="" name="sugar25" placeholder="25%" value=25>
+                                            <div class="item-properties-card">
+                                                <p class="title">
+                                                    Sugar (%)
+                                                </p>
+                                                <div class="ip-variety">
+                                                    <input type="" name="sugar25" placeholder="25%" value=25>
                                                         <input type="" name="sugar50" placeholder="50%" value=50>
                                                         <input type="" name="sugar100" placeholder="100%" value=100>
-                                                    </div>
+                                                        <!-- <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'S', 25)">25%</button>
+                                                        <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'M', 50)">50%</button>
+                                                        <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'L', 100)">100%</button> -->
+                                                    <!-- <button type="button" data-value="25">25</button>
+                                                    <button type="button" data-value="50">50</button>
+                                                    <button type="button" data-value="100">100</button> -->
                                                 </div>
                                             </div>
+                                        </div>
 
-                                            <div class="button_itemProperties">
-                                                <button type="submit" name="addToCart">+ Add</button>
-                                            </div>
+                                        <div class="button_itemProperties">
+                                            <button type="button" name="addToCart">+ Add</button>
+                                            <!-- onclick="addToCart(<?= $prod['id']; ?>)"  -->
+                                            <!-- <button type="button" class="addBtn">+ Add</button> -->
+                                        </div>
                                         </form>
                                     </div>
 
                                 <?php endwhile; ?>
                             </div>
 
-                        <?php else: ?>
-                            <div class="card-container">
-                                <div class="no-selection-message">
-                                    <h1>No products in this category.</h1>
-                                </div>
-                            </div>
-                        <?php endif; ?>
+                            <!-- <?php else: ?>
+                                    <div class="card-container">
+                                        <div class="no-selection-message">
+                                            <h1>No products in this category.</h1>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
 
-                    <?php else: ?>
-                        <div class="card-container">
-                            <div class="no-selection-message">
-                                <h1>No category selected.</h1>
-                            </div>
-                        </div>
-                    <?php endif; ?>
+                                <?php else: ?>
+                                    <div class="card-container">
+                                        <div class="no-selection-message">
+                                            <h1>No category selected.</h1>
+                                        </div>
+                                    </div>
+                                <?php endif; ?> -->
+
                 </div>
 
             </div>
@@ -171,18 +205,12 @@ $icons = [
 
             <!--cart section-->
             <div class="cart-content">
-                <div class="searchProduct">
-                    <input type="text" id="search-product" name="search" placeholder="Search all products">
-                    <button>Search</button>
-                </div>
 
+                <div class="cart">
 
-                <div class="cart-container">
-
-                    <div class="cart">
-
-                        <?php $placeholderJohnDoe = "John Doe"; ?>
+                    <div class="top-cart">
                         <div class="cashier">
+                            <?php $placeholderJohnDoe = "John Doe"; ?>
                             <div>
                                 <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -192,7 +220,7 @@ $icons = [
                             </div>
                             <p><?= $placeholderJohnDoe; ?></p>
                             <a href="changeCashier">
-                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                <svg width="24" height="24" viewBox="0 0 25 25" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M2.41154 24.5937C1.74608 24.5937 1.17661 24.357 0.703132 23.8835C0.22965 23.41 -0.00749417 22.8402 -0.00830078 22.1739V5.23504C-0.00830078 4.56958 0.228844 4.00011 0.703132 3.52663C1.17742 3.05315 1.74689 2.81601 2.41154 2.8152H10.3063C10.7096 2.8152 11.012 2.94143 11.2137 3.1939C11.4154 3.44637 11.5162 3.72345 11.5162 4.02512C11.5162 4.32679 11.4105 4.60427 11.1992 4.85754C10.9879 5.11082 10.6801 5.23665 10.276 5.23504H2.41154V22.1739H19.3504V14.2792C19.3504 13.8759 19.4766 13.5734 19.7291 13.3717C19.9816 13.1701 20.2587 13.0693 20.5603 13.0693C20.862 13.0693 21.1395 13.1701 21.3928 13.3717C21.646 13.5734 21.7719 13.8759 21.7703 14.2792V22.1739C21.7703 22.8394 21.5335 23.4092 21.06 23.8835C20.5865 24.3578 20.0167 24.5946 19.3504 24.5937H2.41154ZM7.25122 16.1243V13.1903C7.25122 12.8676 7.31171 12.5599 7.4327 12.2671C7.5537 11.9743 7.7251 11.7174 7.94692 11.4964L18.3522 1.09106C18.5942 0.84908 18.8664 0.667592 19.1689 0.5466C19.4714 0.425608 19.7739 0.365112 20.0764 0.365112C20.399 0.365112 20.7067 0.425608 20.9995 0.5466C21.2923 0.667592 21.5593 0.84908 21.8005 1.09106L23.4944 2.8152C23.7162 3.05718 23.8876 3.32458 24.0086 3.61738C24.1296 3.91018 24.1901 4.20741 24.1901 4.50909C24.1901 4.81076 24.1348 5.1084 24.0243 5.40201C23.9138 5.69561 23.7372 5.9626 23.4944 6.20297L13.0891 16.6083C12.8673 16.8301 12.6104 17.0067 12.3184 17.1382C12.0264 17.2697 11.7186 17.335 11.3952 17.3342H8.46114C8.11833 17.3342 7.83117 17.2181 7.59967 16.9858C7.36818 16.7535 7.25202 16.4663 7.25122 16.1243ZM9.67106 14.9144H11.3649L18.3825 7.89686L17.5355 7.04992L16.6583 6.20297L9.67106 13.1903V14.9144Z"
@@ -201,7 +229,7 @@ $icons = [
                             </a>
                         </div>
 
-                        <div class="bastaCart">
+                        <!-- <div class="bastaCart">
                             <table>
                                 <thead>
                                     <tr>
@@ -209,15 +237,16 @@ $icons = [
                                     </tr>
                                 </thead>
                             </table>
-                        </div>
+                        </div> -->
 
+                    </div>
+
+                    <div class="btm-cart">
+                        <?php $placeholderMuna = "₱ 0.00" ?>
                         <div class="lalagyan">
                             <div class="linya">
                             </div>
                         </div>
-
-
-                        <?php $placeholderMuna = "₱ 0.00" ?>
 
                         <div class="billingPoMaem">
                             <table class="billing">
@@ -240,22 +269,66 @@ $icons = [
                                     </tr>
                                 </tbody>
                             </table>
+
                         </div>
 
                         <div class="receiptPrint">
-                            <button class="print" type="submit" name="submit">PRINT RECEIPT</button>
+                            <button class="print" type="submit" name="submit">Print Receipt</button>
                         </div>
-
                     </div>
 
+
                 </div>
+
 
             </div>
 
 
-
         </main>
     </div>
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".card").forEach(card => {
+                // SIZE group
+                const sizeButtons = card.querySelectorAll(".item-properties-card.size button");
+                sizeButtons.forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        sizeButtons.forEach(b => b.classList.remove("active"));
+                        btn.classList.add("active");
+                    });
+                });
+
+                // SUGAR group
+                const sugarButtons = card.querySelectorAll(".item-properties-card.sugar button");
+                sugarButtons.forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        sugarButtons.forEach(b => b.classList.remove("active"));
+                        btn.classList.add("active");
+                    });
+                });
+
+                // ADD TO CART
+                card.querySelector(".addBtn").addEventListener("click", () => {
+                    const id = card.dataset.id;
+                    const sizeBtn = card.querySelector(".item-properties-card.size button.active");
+                    const sugarBtn = card.querySelector(".item-properties-card.sugar button.active");
+
+                    if (!sizeBtn || !sugarBtn) {
+                        alert("Please select a size and sugar level first.");
+                        return;
+                    }
+
+                    const size = sizeBtn.dataset.value;
+                    const sugar = sugarBtn.dataset.value;
+
+                    // Send via GET to your PHP
+                    window.location.href = `addToCart.php?id=${id}&size=${size}&sugar=${sugar}`;
+                });
+            });
+        });
+
+    </script> -->
+
 </body>
 
 </html>
