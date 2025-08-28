@@ -7,7 +7,6 @@ $products = $db->displayProducts();
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,10 +14,11 @@ $products = $db->displayProducts();
     <meta charset="UTF-8">
     <title>Brew & Bean 2.0</title>
     <link rel="stylesheet" href="../src/styles/global.css">
-    <link rel="stylesheet" href="../src/styles/updateForm.css">
+    <link rel="stylesheet" href="../src/styles/inventory.css">
 </head>
 
 <body>
+
     <?php include "./partials/nav.php" ?>
 
     <div class="container">
@@ -101,6 +101,7 @@ $products = $db->displayProducts();
     <script src="../src/js/index.js"></script>
 
     <!-- <?php
+>>>>>>>>> Temporary merge branch 2
     include "./partials/nav.php"
     ?>
 
