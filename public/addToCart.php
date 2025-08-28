@@ -157,9 +157,9 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
                                                     Sugar (%)
                                                 </p>
                                                 <div class="ip-variety">
-                                                    <input type="" name="sugar25" placeholder="25%" value=25>
-                                                        <input type="" name="sugar50" placeholder="50%" value=50>
-                                                        <input type="" name="sugar100" placeholder="100%" value=100>
+                                                    <input type="" name="sugar25" placeholder="25" value=25>
+                                                        <input type="" name="sugar50" placeholder="50" value=50>
+                                                        <input type="" name="sugar100" placeholder="100" value=100>
                                                         <!-- <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'S', 25)">25%</button>
                                                         <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'M', 50)">50%</button>
                                                         <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'L', 100)">100%</button> -->
