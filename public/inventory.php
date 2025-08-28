@@ -1,12 +1,11 @@
 <?php
 
-require_once ("../database/database.php");
+require_once("../database/database.php");
 
 $db = new Database();
 $products = $db->displayProducts();
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,32 +14,35 @@ $products = $db->displayProducts();
     <meta charset="UTF-8">
     <title>Brew & Bean 2.0</title>
     <link rel="stylesheet" href="../src/styles/global.css">
+    <link rel="stylesheet" href="../src/styles/inventory.css">
 </head>
 
 <body>
+
     <?php include "./partials/nav.php" ?>
 
-    <!-- <div class="container"> -->
-        <!-- inventory view partition -->
-        <!-- <div class="form-box active" id="inventory-view"> -->
-            <!-- href add onclick="showForm('add-form')" -->
-            <!-- <a href="#" onclick="showForm('add-form')">+ Add Item</a>
-            <br> -->
-            <!-- href update onclick="showForm('update-form')" -->
-            <!-- <a href="#" onclick="showForm('update-form')">Update</a>
-            <br> -->
-            <!-- INVENTORY VIEW -->
-        <!-- </div> -->
-    <!--</div> container closing-->
-
-    <!-- <?php
-    include "./partials/nav.php"
-    ?> -->
-
-    <a href="add.php"><button>Add New Product</button></a>
-    <div
-        style="margin-left:340px; margin-top:40px; max-width:800px; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.08); border-radius:10px; padding:24px;">
-        <table border=1 style="width:100%; border-collapse:collapse;">
+    <div class="main-content">
+        <div class="pageHeader">
+            <h3>Inventory</h3>
+            
+            <div class="searchBar">
+                <form action="\search" method="get">
+                    <input
+                        type="text"
+                        placeholder="search..."
+                        name="search"
+                        id="search-input" />
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    <div class="addButton">
+            <a href="add.php"><button><svg width="12" height="12" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.5308 7.33842H7.33842V11.5308C7.33842 11.992 6.96111 12.3693 6.49994 12.3693C6.03878 12.3693 5.66147 11.992 5.66147 11.5308V7.33842H1.46909C1.00793 7.33842 0.630615 6.96111 0.630615 6.49994C0.630615 6.03878 1.00793 5.66147 1.46909 5.66147H5.66147V1.46909C5.66147 1.00793 6.03878 0.630615 6.49994 0.630615C6.96111 0.630615 7.33842 1.00793 7.33842 1.46909V5.66147H11.5308C11.992 5.66147 12.3693 6.03878 12.3693 6.49994C12.3693 6.96111 11.992 7.33842 11.5308 7.33842Z" fill="#39261F"/>
+</svg>
+Add Item</button></a>
+            </div>
+        <table class="stocks">
             <thead>
                 <tr>
                     <th>Product Name</th>
@@ -51,13 +53,20 @@ $products = $db->displayProducts();
             </thead>
             <tbody>
                 <?php foreach ($products as $product): ?>
-                <tr>
-                    <td><?= htmlspecialchars($product['product_name']) ?></td>
-                    <td><?= htmlspecialchars($product['category']) ?></td>
-                    <td><?= htmlspecialchars($product['price']) ?></td>
-                    <td> edit </td>
-                    <td> delete</td>
-                </tr>
+                    <tr>
+                        <td><?= htmlspecialchars($product['product_name']) ?></td>
+                        <td><?= htmlspecialchars($product['category']) ?></td>
+                        <td><?= htmlspecialchars($product['price']) ?></td>
+                        <td><svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.5 3H5.5C4.96957 3 4.46086 3.21071 4.08579 3.58579C3.71071 3.96086 3.5 4.46957 3.5 5V19C3.5 19.5304 3.71071 20.0391 4.08579 20.4142C4.46086 20.7893 4.96957 21 5.5 21H19.5C20.0304 21 20.5391 20.7893 20.9142 20.4142C21.2893 20.0391 21.5 19.5304 21.5 19V12" stroke="#006633" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.8751 2.62498C19.2729 2.22716 19.8125 2.00366 20.3751 2.00366C20.9377 2.00366 21.4773 2.22716 21.8751 2.62498C22.2729 3.02281 22.4964 3.56237 22.4964 4.12498C22.4964 4.68759 22.2729 5.22716 21.8751 5.62498L12.8621 14.639C12.6246 14.8762 12.3313 15.0499 12.0091 15.144L9.13609 15.984C9.05005 16.0091 8.95883 16.0106 8.872 15.9883C8.78517 15.9661 8.70592 15.9209 8.64254 15.8575C8.57916 15.7942 8.53398 15.7149 8.51174 15.6281C8.48949 15.5412 8.491 15.45 8.51609 15.364L9.35609 12.491C9.45062 12.169 9.62463 11.876 9.86209 11.639L18.8751 2.62498Z" stroke="#006633" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</td>
+                        <td><svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5.086 0.586C5.46099 0.210901 5.96961 0.000113275 6.5 0H10.5C11.0304 0 11.5391 0.210714 11.9142 0.585786C12.2893 0.960859 12.5 1.46957 12.5 2V4H15.5C15.7652 4 16.0196 4.10536 16.2071 4.29289C16.3946 4.48043 16.5 4.73478 16.5 5C16.5 5.26522 16.3946 5.51957 16.2071 5.70711C16.0196 5.89464 15.7652 6 15.5 6V18C15.5 18.5304 15.2893 19.0391 14.9142 19.4142C14.5391 19.7893 14.0304 20 13.5 20H3.5C2.96957 20 2.46086 19.7893 2.08579 19.4142C1.71071 19.0391 1.5 18.5304 1.5 18V6C1.23478 6 0.98043 5.89464 0.792893 5.70711C0.605357 5.51957 0.5 5.26522 0.5 5C0.5 4.73478 0.605357 4.48043 0.792893 4.29289C0.98043 4.10536 1.23478 4 1.5 4H4.5V2C4.50011 1.46961 4.7109 0.960985 5.086 0.586ZM6.5 4H10.5V2H6.5V4ZM7.5 8C7.5 7.73478 7.39464 7.48043 7.20711 7.29289C7.01957 7.10536 6.76522 7 6.5 7C6.23478 7 5.98043 7.10536 5.79289 7.29289C5.60536 7.48043 5.5 7.73478 5.5 8V16C5.5 16.2652 5.60536 16.5196 5.79289 16.7071C5.98043 16.8946 6.23478 17 6.5 17C6.76522 17 7.01957 16.8946 7.20711 16.7071C7.39464 16.5196 7.5 16.2652 7.5 16V8ZM11.5 8C11.5 7.73478 11.3946 7.48043 11.2071 7.29289C11.0196 7.10536 10.7652 7 10.5 7C10.2348 7 9.98043 7.10536 9.79289 7.29289C9.60536 7.48043 9.5 7.73478 9.5 8V16C9.5 16.2652 9.60536 16.5196 9.79289 16.7071C9.98043 16.8946 10.2348 17 10.5 17C10.7652 17 11.0196 16.8946 11.2071 16.7071C11.3946 16.5196 11.5 16.2652 11.5 16V8Z" fill="#FF0000"/>
+</svg>
+</td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
