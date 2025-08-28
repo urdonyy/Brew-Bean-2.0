@@ -7,6 +7,7 @@ $products = $db->displayProducts();
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,8 +19,9 @@ $products = $db->displayProducts();
 </head>
 
 <body>
-
-    <?php include "./partials/nav.php" ?>
+    <?php
+    include "./partials/nav.php"
+    ?>
 
     <div class="main-content">
         <div class="pageHeader">
@@ -71,7 +73,6 @@ Add Item</button></a>
             </tbody>
         </table>
     </div>
-
 
 </body>
 
