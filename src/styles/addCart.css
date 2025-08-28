@@ -324,7 +324,7 @@ input#search-product {
     gap: 3px;
 }
 
-.item-properties-card .ip-variety input {
+/* .item-properties-card .ip-variety input {
     width: 35px;
     height: 35px;
     background: #D9D9D9;
@@ -346,7 +346,7 @@ input#search-product {
     background: var(--secondary-color);
     color: #FFFFFF;
     font-weight: 600;
-}
+} */
 
 /* .item-properties-card .ip-variety button:focus {
     background: var(--secondary-color);
@@ -584,14 +584,150 @@ table.billing {
 }
 
 /* unfinished mark*/
-.cart .bastaCart table {
+
+.cartContainer {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    flex-direction: row;
+    gap: 50px;
+    width: 100%;
+    height: 100%;
 }
 
-h2 {
+.leftPartitionCart {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.centerPartitionCart {
+    margin-top: 2.5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.coffeeName {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.qntt p {
+    color: #281508;
+    font-weight: 600;
+    font-size: 12.81px;
+}
+
+p {
+    font-weight: 300;
+    font-size: 14.1px;
+    font-family: "Nata Sans", sans-serif;
+    color: #8D8989;
+}
+
+.qntt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qntt .decrease {
+    border: 2px solid var(--secondary-color);
+    border-radius: 50px 0 0 50px;
+    background: #fff;
+    color: var(--secondary-color);
+    font-weight: 600;
+    padding: 8px 10px 8px 10px;
+}
+
+.qntt .increase {
+    border: 2px solid var(--secondary-color);
+    border-radius: 0 50px 50px 0;
+    background: var(--secondary-color);
+    color: #fff;
+    font-weight: 600;
+    padding: 8px 10px 8px 10px;
+}
+
+.qntt .decrease:hover {
+    border: 2px solid var(--tertiary-color);
+    background: #fff;
+    color: var(--tertiary-color);
+    cursor: pointer;
+}
+
+.qntt .increase:hover {
+    border: 2px solid var(--tertiary-color);
+    background: var(--tertiary-color);
+    cursor: pointer;
+}
+
+.qntt .deleteBtn {
+    border: none;
+    background: none;
+}
+
+.deleteBtn svg path:hover {
+    cursor: pointer;
+    fill: #8d0000;
+}
+
+.deleteBtn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.qntt button {
+    border: 1px solid var(--secondary-color);
+    padding: 8px;
+}
+
+.cartItems {
+    padding: 20px;
+}
+
+.rightPartitionCart {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+    width: 100%;
+}
+
+.rightPartitionCart button svg path {
+    fill: #FFFFFF;
+}
+
+button {
+    padding: 10px;
+}
+
+button.confirmDelete {
+    background: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    height: 80px;
+}
+
+button.cancelDelete {
+    background: #FF4848;
+    border: 1px solid #FF4848;
+    height: 80px;
+}
+
+.orderItems {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.coffeeName h4 {
+    max-width: 50px;
+    min-width: 50px;
+}
+
+/* 
+.orderItems {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -601,6 +737,64 @@ h2 {
     top: 50;
     top: 140px;
     left: 200px;
-}
+} */
 
 /* unfinished mark*/
+
+.size-label,
+.sugar-label {
+    height: 40px;
+    width: 40px;
+    border: 1px solid #D9D9D9;
+    background: #D9D9D9;
+    border-radius: 100%;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+    overflow: hidden;
+    text-align: center;
+}
+
+.size-label input,
+.sugar-label input {
+    display: none;
+}
+
+.size-label:hover,
+.sugar-label:hover {
+    background: var(--tertiary-color);
+    color: #FFFFFF;
+    font-weight: 600;
+    border: 1px solid var(--tertiary-color);
+}
+
+.size-label span,
+.sugar-label span {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 
+.size-label input:checked+span {
+    background: var(--secondary-color);
+    color: #fff;
+    border-color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+} */
+
+.size-label:has(input:checked),
+.sugar-label:has(input:checked) {
+    background: var(--secondary-color);
+    color: #fff;
+    border: 1px solid var(--secondary-color);
+}
+
+.noItemInCart {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+}
+
