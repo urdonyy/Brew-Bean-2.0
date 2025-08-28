@@ -1,12 +1,32 @@
 <?php
 $currentPage = basename($_SERVER['PHP_SELF']);
 
-require_once("../src/controller/controller.php");
+require_once("../database/database.php");
+
+
+$db = new Database();
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  
+    $postData = [
+        'product_name' => $_POST['product_name'] ?? '',
+        'image_filename' => $_POST['image_filename'] ?? '',
+        'price' => $_POST['price'] ?? '',
+        'category' => $_POST['category'] ?? ''
+    ];
+
+   
+    if ($db->addProduct($postData)) {
+        echo "<script>alert('Product added successfully!');</script>";
+    } else {
+        echo "<script>alert('Error adding product. Please ensure all fields are filled correctly.');</script>";
+    }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,13 +34,9 @@ require_once("../src/controller/controller.php");
     <link rel="stylesheet" href="../src/styles/global.css">
     <link rel="stylesheet" href="../src/styles/updateForm.css">
 </head>
-
 <body>
     <div class="container">
-        <!-- add form partition -->
-        <!-- <div class="form-box" id="add-form"> -->
         <div class="add-container">
-            <!-- <a href="inventory.php" onclick="showForm('inventory-view')">Inventory > Add Item</a> -->
             <div class="backH">
                 <a href="inventory.php" onclick="showForm('inventory-view')">
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -30,39 +46,37 @@ require_once("../src/controller/controller.php");
                 </a>
                 <h1>Inventory > Add Item</h1>
             </div>
-            <form action="" method="">
+            <form action="" method="POST">
                 <h1>
                     Add New Item
                 </h1>
                 <p>Add new item to your menu.</p>
                 <div class="inner-container">
-                    <!-- left div -->
                     <div class="left-div">
                         <div class="coffee-info">
                             <h2>Product Name & File Name</h2>
                             <label>Item Name</label>
-                            <input type="text">
+                            <input type="text" name="product_name" required>
                             <label>File Name</label>
-                            <input type="file">
+                            <input type="text" name="image_filename" required>
                         </div>
                         <div class="coffee-category">
                             <h2>Category</h2>
                             <label>Item Category</label>
-                            <select name="" id="">
+                            <select name="category" required>
                                 <option disabled selected>Coffee</option>
-                                <option>Hot Coffee</option>
-                                <option>Cold Coffee</option>
-                                <option>Non-Coffee</option>
+                                <option value="Hot Coffee">Hot Coffee</option>
+                                <option value="Cold Coffee">Cold Coffee</option>
+                                <option value="Non-Coffee">Non-Coffee</option>
                             </select>
                         </div>
                     </div>
 
-                    <!-- right div -->
                     <div class="right-div">
                         <div class="coffee-price">
                             <h2>Price</h2>
                             <label>Item Price</label>
-                            <input type="number">
+                            <input type="number" name="price" step="0.01" required>
                         </div>
                         <div class="coffee-quantity">
                             <h2>Stock Quantity</h2>
@@ -70,16 +84,10 @@ require_once("../src/controller/controller.php");
                             <input type="number">
                         </div>
                         <div class="btns">
-                            <button class="cancel" type="submit">Cancel</button>
+                            <button class="cancel" type="button" onclick="window.location.href='inventory.php'">Cancel</button>
                             <button class="confirm" type="submit">Confirm</button>
                         </div>
-                    </div> <!-- closing right-div -->
-                </div> <!-- closing inner-container -->
-            </form> <!-- closing form -->
-        </div> <!-- closing add-container -->
-        <!-- </div> closing form box -->
-    </div>
+                    </div> </div> </form> </div> </div>
     <script src="../src/js/index.js"></script>
 </body>
-
 </html>
