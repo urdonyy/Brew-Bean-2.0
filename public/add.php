@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    
     if ($db->addProduct($postData)) {
-        echo "<script>alert('Product added successfully!');</script>";
+        echo "<script>alert('Product added successfully!'); window.location.href='inventory.php'</script>";
     } else {
         echo "<script>alert('Error adding product. Please ensure all fields are filled correctly.');</script>";
     }

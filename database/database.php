@@ -40,13 +40,18 @@ class Database {
         return $stmt->get_result();
     }
 
+    /////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
     // INVENTORY - Function for displaying product by table
     public function displayProducts() {
         $query = "SELECT product_name, category, price FROM products ORDER BY category DESC";
         $result = $this->conn->query($query);
     
         if ($result === false) {
-            // Optional: log error or throw exception
             return [];  // Return empty array on query error
         }
     
@@ -62,8 +67,19 @@ class Database {
     }
     
 
+    //Get Product Id 
+    public function getProductbyID($id){
+
+        $stmt = $this->conn->prepare("SELECT * FROM product WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+
     // INVENTORY - Function for adding a product (CREATE-R-U-D)
-public function addProduct($post) {
+    public function addProduct($post) {
     if (
         empty($post['product_name']) ||
         empty($post['image_filename']) ||
@@ -116,6 +132,41 @@ public function deleteProduct($product_name) {
     
     return $success;
 }
+
     // INVENTORY - Function for updating the product (C-R-UPDATE-D)
+    public function updateProduct($post, $original_product_name) {
+        if (
+            empty($post['product_name']) ||
+            empty($post['image_filename']) ||
+            empty($post['price']) ||
+            empty($post['category'])
+        ) {
+            return false;
+        }
+    
+        $new_product_name = $post['product_name'];
+        $new_image_filename = $post['image_filename'];
+        $new_price = $post['price'];
+        $new_category = $post['category'];
+    
+        $stmt = $this->conn->prepare(
+            "UPDATE products 
+             SET product_name = ?, image_filename = ?, price = ?, category = ? 
+             WHERE product_name = ?"
+        );
+    
+        if ($stmt === false) {
+            return false;
+        }
+    
+        // 5 parameters: s = string, d = double
+        $stmt->bind_param("ssdss", $new_product_name, $new_image_filename, $new_price, $new_category, $original_product_name);
+    
+        $success = $stmt->execute();
+        $stmt->close();
+    
+        return $success;
+    }
+    
 }
 ?>
