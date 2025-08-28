@@ -63,33 +63,59 @@ class Database {
     
 
     // INVENTORY - Function for adding a product (CREATE-R-U-D)
-    
-    public function addProduct($post) {
-        if (
-            empty($post['product_name']) ||
-            empty($post['image_filename']) ||
-            empty($post['price']) ||
-            empty($post['category'])
-        ) {
-            return false; 
-        }
-        $product_name = $this->conn->real_escape_string($post['product_name']);
-        $image_filename = $this->conn->real_escape_string($post['image_filename']);
-        $price = $this->conn->real_escape_string($post['price']);
-        $category = $this->conn->real_escape_string($post['category']);
-
-        $stmt = $this->conn->prepare(
-            "INSERT INTO products (product_name, image_filename, price, category) VALUES (?, ?, ?, ?)"
-        );
-        if ($stmt === false) {
-            return false;
-        }
-        $stmt->bind_param("ssds", $product_name, $image_filename, $price, $category);
-        $success = $stmt->execute();
-        $stmt->close();
-        return $success;
+public function addProduct($post) {
+    if (
+        empty($post['product_name']) ||
+        empty($post['image_filename']) ||
+        empty($post['price']) ||
+        empty($post['category'])
+    ) {
+        return false;
     }
+
+    $product_name = $post['product_name'];
+    $image_filename = $post['image_filename'];
+    $price = $post['price'];
+    $category = $post['category'];
+
+    // SQL statement with placeholders (?)
+    $stmt = $this->conn->prepare(
+        "INSERT INTO products (product_name, image_filename, price, category) VALUES (?, ?, ?, ?)"
+    );
+
+    if ($stmt === false) {
+        // Handle prepare error
+        return false;
+    }
+
+    // "ssds" binds the variables: string, string, double, string
+    $stmt->bind_param("ssds", $product_name, $image_filename, $price, $category);
+    
+    // Execute the statement
+    $success = $stmt->execute();
+    
+    // Close the statement
+    $stmt->close();
+    
+    return $success;
+}
+
     // INVENTORY - Function for deleting the product (C-R-U-DELETE)
+public function deleteProduct($product_name) {
+  
+    $stmt = $this->conn->prepare("DELETE FROM products WHERE product_name = ?");
+
+    if ($stmt === false) {
+        return false;
+    }
+    $stmt->bind_param("s", $product_name);
+    
+    $success = $stmt->execute();
+
+    $stmt->close();
+    
+    return $success;
+}
     // INVENTORY - Function for updating the product (C-R-UPDATE-D)
 }
 ?>
