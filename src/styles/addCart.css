@@ -414,33 +414,21 @@ input#search-product {
   pointer-events: none;
   border-radius: inherit;
 
-  background: repeating-linear-gradient(
-        90deg,
-        var(--primary-color) 0 1px,
-        transparent 8px 16px
-      )
-      0 0/100% 2px no-repeat,
+  background: repeating-linear-gradient(90deg,
+      var(--primary-color) 0 1px,
+      transparent 8px 16px) 0 0/100% 2px no-repeat,
     /* taas */
-      repeating-linear-gradient(
-        90deg,
-        var(--primary-color) 0 1px,
-        transparent 8px 16px
-      )
-      0 100%/100% 2px no-repeat,
+    repeating-linear-gradient(90deg,
+      var(--primary-color) 0 1px,
+      transparent 8px 16px) 0 100%/100% 2px no-repeat,
     /* baba */
-      repeating-linear-gradient(
-        180deg,
-        var(--primary-color) 0 1px,
-        transparent 8px 16px
-      )
-      0 0/2px 100% no-repeat,
+    repeating-linear-gradient(180deg,
+      var(--primary-color) 0 1px,
+      transparent 8px 16px) 0 0/2px 100% no-repeat,
     /* kaliwa */
-      repeating-linear-gradient(
-        180deg,
-        var(--primary-color) 0 1px,
-        transparent 8px 16px
-      )
-      100% 0/2px 100% no-repeat;
+    repeating-linear-gradient(180deg,
+      var(--primary-color) 0 1px,
+      transparent 8px 16px) 100% 0/2px 100% no-repeat;
 }
 
 .cashier {
@@ -519,17 +507,15 @@ input#search-product {
 /* border-top: 2.5px solid #281508; */
 /* } */
 
-tr {
+/* tr {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   overflow: hidden;
-  gap: 225px;
   width: 100%;
 }
 
 .billing tbody {
-  /* max-width: 25vw; */
   width: 100%;
 }
 
@@ -562,7 +548,7 @@ table.billing {
   color: #8d8989;
   font-size: 14.1px;
   font-weight: 400;
-}
+} */
 
 /* print btn */
 .receiptPrint {
@@ -596,133 +582,144 @@ table.billing {
 /* unfinished mark*/
 
 .cartContainer {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  width: 100%;
+  height: 100%;
 }
 
 .leftPartitionCart {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* width: 100%; */
 }
 
 .centerPartitionCart {
-    margin-top: 2.5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
+  /* margin-top: 2.5px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
 }
 
 .coffeeName {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-.qntt p {
-    color: #281508;
-    font-weight: 600;
-    font-size: 12.81px;
+.qntt input {
+  color: #281508;
+  font-weight: 600;
+  font-size: 12.81px;
+  outline: none;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  padding: 16px 0px 16px 0px;
+  border: 2px solid var(--secondary-color);
+  border-right: none;
+  border-left: none;
 }
 
-p {
-    font-weight: 300;
-    font-size: 14.1px;
-    font-family: "Nata Sans", sans-serif;
-    color: #8D8989;
+.centerPartitionCart p {
+  font-weight: 300;
+  font-size: 14.1px;
+  font-family: "Nata Sans", sans-serif;
+  color: #8D8989; 
+  width: 100%;
 }
 
 .qntt {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  /* min-width: 80px; */
+  /* max-width: 124px; */
 }
 
 .qntt .decrease {
-    border: 2px solid var(--secondary-color);
-    border-radius: 50px 0 0 50px;
-    background: #fff;
-    color: var(--secondary-color);
-    font-weight: 600;
-    padding: 8px 10px 8px 10px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 50px 0 0 50px;
+  background: #fff;
+  color: var(--secondary-color);
+  font-weight: 600;
+  padding: 8px 10px 8px 10px;
 }
 
 .qntt .increase {
-    border: 2px solid var(--secondary-color);
-    border-radius: 0 50px 50px 0;
-    background: var(--secondary-color);
-    color: #fff;
-    font-weight: 600;
-    padding: 8px 10px 8px 10px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 0 50px 50px 0;
+  background: var(--secondary-color);
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 10px 8px 10px;
 }
 
 .qntt .decrease:hover {
-    border: 2px solid var(--tertiary-color);
-    background: #fff;
-    color: var(--tertiary-color);
-    cursor: pointer;
+  border: 2px solid var(--tertiary-color);
+  background: #fff;
+  color: var(--tertiary-color);
+  cursor: pointer;
 }
 
 .qntt .increase:hover {
-    border: 2px solid var(--tertiary-color);
-    background: var(--tertiary-color);
-    cursor: pointer;
+  border: 2px solid var(--tertiary-color);
+  background: var(--tertiary-color);
+  cursor: pointer;
 }
 
 .qntt .deleteBtn {
-    border: none;
-    background: none;
+  border: none;
+  background: none;
 }
 
 .deleteBtn svg path:hover {
-    cursor: pointer;
-    fill: #8d0000;
+  cursor: pointer;
+  fill: #8d0000;
 }
 
 .deleteBtn svg {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .qntt button {
-    border: 1px solid var(--secondary-color);
-    padding: 8px;
+  border: 1px solid var(--secondary-color);
+  padding: 8px;
 }
 
 .cartItems {
-    padding: 20px;
+  padding: 20px;
 }
 
 .rightPartitionCart {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 12px;
-    width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  /* margin-top: 12px; */
+  /* width: 100%; */
 }
 
 .rightPartitionCart button svg path {
-    fill: #FFFFFF;
+  fill: #FFFFFF;
 }
 
 button {
-    padding: 10px;
+  padding: 10px;
 }
 
 button.confirmDelete {
-    background: var(--secondary-color);
-    border: 1px solid var(--secondary-color);
-    height: 70px;
+  background: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  height: 70px;
 }
 
 button.cancelDelete {
-    background: #FF4848;
-    border: 1px solid #FF4848;
-    height: 70px;
+  background: #FF4848;
+  border: 1px solid #FF4848;
+  height: 70px;
 }
 
 button.confirmDelete:hover {
@@ -738,14 +735,14 @@ button.cancelDelete:hover {
 }
 
 .orderItems {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .coffeeName h4 {
-    max-width: 50px;
-    min-width: 50px;
+  max-width: 50px;
+  min-width: 50px;
 }
 
 /* 
@@ -765,38 +762,38 @@ button.cancelDelete:hover {
 
 .size-label,
 .sugar-label {
-    height: 40px;
-    width: 40px;
-    border: 1px solid #D9D9D9;
-    background: #D9D9D9;
-    border-radius: 100%;
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.2s;
-    overflow: hidden;
-    text-align: center;
+  height: 40px;
+  width: 40px;
+  border: 1px solid #D9D9D9;
+  background: #D9D9D9;
+  border-radius: 100%;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
+  overflow: hidden;
+  text-align: center;
 }
 
 .size-label input,
 .sugar-label input {
-    display: none;
+  display: none;
 }
 
 .size-label:hover,
 .sugar-label:hover {
-    background: var(--tertiary-color);
-    color: #FFFFFF;
-    font-weight: 600;
-    border: 1px solid var(--tertiary-color);
+  background: var(--tertiary-color);
+  color: #FFFFFF;
+  font-weight: 600;
+  border: 1px solid var(--tertiary-color);
 }
 
 .size-label span,
 .sugar-label span {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 
@@ -809,15 +806,15 @@ button.cancelDelete:hover {
 
 .size-label:has(input:checked),
 .sugar-label:has(input:checked) {
-    background: var(--secondary-color);
-    color: #fff;
-    border: 1px solid var(--secondary-color);
+  background: var(--secondary-color);
+  color: #fff;
+  border: 1px solid var(--secondary-color);
 }
 
 .noItemInCart {
-    display: flex;
-    justify-content: center;
-    margin-top: 150px;
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
 }
 
 .cartContainer .rightPartitionCart {
@@ -830,4 +827,32 @@ button.cancelDelete:hover {
 
 .cartContainer.showDeleteConfirm .deleteBtn {
   display: none;
+}
+
+.billing-summary {
+  padding: 10px 10px 20px 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+
+.billing-summary h4 {
+  font-size: 21.14px;
+  font-weight: 600;
+  font-family: "Nata Sans", sans-serif;
+  color: #281508;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.billing-summary h6 {
+  font-size: 14.1px;
+  font-weight: 400;
+  font-family: "Nata Sans", sans-serif;
+  color: #8D8989;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

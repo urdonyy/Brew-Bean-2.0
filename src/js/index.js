@@ -24,11 +24,12 @@ function renderCartItems() {
         orderItems.innerHTML = `
                 <div class="noItemInCart"><p>No Items in Cart.</p></div>
                 `;
+        updateBillingSummary();
         return;
     } 
 
     //loop through cart items and display them
-    itemsInCart.forEach((item) => {
+    itemsInCart.forEach((item, index) => {
         orderItems.innerHTML += /*html*/`
                 <div class="cartContainer">
                     <div class="leftPartitionCart">
@@ -37,7 +38,14 @@ function renderCartItems() {
                         </div> 
                         <div class="qntt"> 
                             <button class="decrease">-</button>
-                            <p><?= "1"; ?></p><!-- hardcoded quantity, needs fixing later -->
+                            <!-- <p><?= "1"; ?></p>hardcoded quantity, needs fixing later -->
+                            <input
+                                type="number"
+                                class="qtyInput"
+                                data-index="${index}"
+                                value="${item.quantity}"
+                                min="1"
+                            >
                             <button class="increase">+</button>
                             <button class="deleteBtn">
                                 <!-- trashcan SVG -->
@@ -49,7 +57,7 @@ function renderCartItems() {
                     </div>
                      
                     <div class="centerPartitionCart">
-                        <p>- additional info -</p>
+                        <p>-additional info-</p>
                         <h5>Size: ${item.size}</h5>
                         <h5>Sugar: ${item.sugar}</h5>
                         <h5>Price: ${item.price}</h5>
@@ -76,6 +84,24 @@ function renderCartItems() {
     })
 
     attachCartEvents();
+    updateBillingSummary();
+}
+
+function updateBillingSummary() {
+    let subtotal = 0;
+
+    itemsInCart.forEach(item => {
+        subtotal += parseFloat(item.price) * (item.quantity || 1);
+    });
+
+    let discount = 0; //static muna (WIP)
+    let vat = (subtotal - discount) * 0.12;
+    let total = subtotal - discount + vat;
+
+    document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+    document.getElementById('discount').textContent = discount.toFixed(2);
+    document.getElementById('vat').textContent = vat.toFixed(2);
+    document.getElementById('total').textContent = total.toFixed(2);
 }
 
 //rightPartition shows/hide

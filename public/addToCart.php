@@ -262,7 +262,7 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
                             </div>
                         </div>
 
-                        <div class="billingPoMaem">
+                        <!-- <div class="billingPoMaem">
                             <table class="billing">
                                 <tbody>
                                     <tr>
@@ -283,7 +283,24 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
                                     </tr>
                                 </tbody>
                             </table>
-
+                        </div> -->
+                        <div class="billing-summary">
+                            <h4>
+                                Subtotal:
+                                <div>₱<span id="subtotal">0.00</span></div>
+                            </h4>
+                            <h6>
+                                Discount(10%): 
+                                <div>₱<span id="discount">0.00</span></div>
+                            </h6>
+                            <h6>
+                                VAT(12%):
+                                <div>₱<span id="vat">0.00</span></div>
+                            </h6>
+                            <h4>
+                                Total:
+                                <div>₱<span id="total">0.00</span></div>
+                            </h4>
                         </div>
 
                         <div class="receiptPrint">
