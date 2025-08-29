@@ -725,6 +725,18 @@ button.cancelDelete {
     height: 70px;
 }
 
+button.confirmDelete:hover {
+  background: #8d0000;
+  border: 1px solid #8d0000;
+  cursor: pointer;
+}
+
+button.cancelDelete:hover {
+  background: #8d0000;
+  border: 1px solid #8d0000;
+  cursor: pointer;
+}
+
 .orderItems {
     display: flex;
     flex-direction: column;
