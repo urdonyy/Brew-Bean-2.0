@@ -1,7 +1,6 @@
 <?php
-$currentPage = basename($_SERVER['PHP_SELF']);
 
-require_once("../src/controller/controller.php");
+require_once("../src/controller/updateController.php");
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +29,7 @@ require_once("../src/controller/controller.php");
                 </a>
                 <h1>Inventory > Update Item</h1>
             </div>
-            <form action="" method="post">
+            <form method="post">
                 <h1>
                     Update Details
                 </h1>
@@ -41,19 +40,19 @@ require_once("../src/controller/controller.php");
                         <div class="coffee-info">
                             <h2>Product Name & File Name</h2>
                             <label>Item Name</label>
-                            <input type="text" name="item-name">
+                            <input type="text" name="product_name" value="<?= htmlspecialchars($product['product_name']) ?>" required>
                             <label>File Name</label>
-                            <input type="file" name="file-name">
+                            <input type="text" name="image_filename" value="<?= htmlspecialchars($product['image_filename']) ?>" required>
                         </div>
                         <div class="coffee-category">
                             <h2>Category</h2>
                             <label>Item Category</label>
-                            <select name="" id="">
-                                <option disabled selected>Coffee</option>
-                                <option>Hot Coffee</option>
-                                <option>Cold Coffee</option>
-                                <option>Non-Coffee</option>
-                            </select>
+                                <select name="category" required>
+                                <option value="Hot Coffee" <?= ($product['category'] == 'Hot Coffee') ? 'selected' : '' ?>>Hot Coffee</option>
+                                <option value="Cold Coffee" <?= ($product['category'] == 'Cold Coffee') ? 'selected' : '' ?>>Cold Coffee</option>
+                                <option value="Non-Coffee" <?= ($product['category'] == 'Non-Coffee') ? 'selected' : '' ?>>Non-Coffee</option>
+                                </select>
+
                         </div>
                     </div>
 
@@ -62,7 +61,7 @@ require_once("../src/controller/controller.php");
                         <div class="coffee-price">
                             <h2>Price</h2>
                             <label>Item Price</label>
-                            <input type="number">
+                            <input type="number" name="price" step="0.1" value="<?= htmlspecialchars($product['price']) ?>"required>
                         </div>
                         <div class="coffee-quantity">
                             <h2>Stock Quantity</h2>
@@ -70,7 +69,7 @@ require_once("../src/controller/controller.php");
                             <input type="number">
                         </div>
                         <div class="btns">
-                            <button class="cancel" type="submit">Cancel</button>
+                            <button class="cancel" type="button" onclick="window.location.href='inventory.php'">Cancel</button>
                             <button class="confirm" type="submit">Confirm</button>
                         </div>
                     </div>
