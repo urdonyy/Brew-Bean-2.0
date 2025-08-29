@@ -26,7 +26,7 @@ function renderCartItems() {
                 `;
         updateBillingSummary();
         return;
-    } 
+    }
 
     //loop through cart items and display them
     itemsInCart.forEach((item, index) => {
@@ -37,7 +37,7 @@ function renderCartItems() {
                             <h4> ${item.name}</h4>
                         </div> 
                         <div class="qntt"> 
-                            <button class="decrease">-</button>
+                            <button class="decrease" data-index="${index}">-</button>
                             <!-- <p><?= "1"; ?></p>hardcoded quantity, needs fixing later -->
                             <input
                                 type="number"
@@ -46,7 +46,7 @@ function renderCartItems() {
                                 value="${item.quantity}"
                                 min="1"
                             >
-                            <button class="increase">+</button>
+                            <button class="increase" data-index="${index}">+</button>
                             <button class="deleteBtn">
                                 <!-- trashcan SVG -->
                                 <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,14 +106,6 @@ function updateBillingSummary() {
 
 //rightPartition shows/hide
 function attachCartEvents() {
-    // if(e.target.classList.contains("confirmDelete")) {
-    //     const id = parseInt(cartItem.dataset.id, 10);
-    //     itemsInCart = itemsInCart.filter(item => item.id !== id);
-    //     // itemsInCart.splice(index, 1);
-    //     localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
-    //     renderCartItems();
-    // } 
-
     document.querySelectorAll(".cartContainer").forEach((cartItem, index) => {
         const deleteBtn = cartItem.querySelector(".deleteBtn");
         const confirmBtn = cartItem.querySelector(".confirmDelete");
@@ -122,7 +114,7 @@ function attachCartEvents() {
         deleteBtn.addEventListener("click", () => {
             cartItem.classList.add("showDeleteConfirm");
         });
-        
+
         confirmBtn.addEventListener("click", () => {
             itemsInCart.splice(index, 1);
             localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
@@ -136,19 +128,6 @@ function attachCartEvents() {
     });
 
 }
-    
-
-// document.querySelectorAll('.cartItem').forEach(cart => {
-//     const btn = cart.querySelector('button');
-//     btn.addEventListener('click', () => {
-//         alert('test')
-//         cart.remove();
-
-//         cartData.splice(index, 1);
-//         localStorage.setItem("cart", JSON.stringify(cartData));
-//         renderCart()
-//     });
-// })
 
 //=============================
 //handle add-to-cart form submission
@@ -207,3 +186,17 @@ printRcpt.addEventListener("click", function (event) {
 renderCartItems();
 //
 attachCartEvents();
+
+// const d = document
+
+// d.querySelector('.increase').addEventListener('click', (e) => {
+//     console.log(e)
+// })
+
+// function addValue() {
+//     console.log('test')
+// }
+
+// const addValue = () => {
+//     console.log('test')
+// }
