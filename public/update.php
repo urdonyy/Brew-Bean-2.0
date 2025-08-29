@@ -1,32 +1,7 @@
 <?php
-$currentPage = basename($_SERVER['PHP_SELF']);
-require_once("../database/database.php");
 
-$db = new Database();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $original_product_name = $_GET['product_name']; // keep track of original
-    $result = $db->updateProduct($_POST, $original_product_name);
-
-    if ($result) {
-        echo "<script>alert('Product added successfully!'); window.location.href='inventory.php'</script>";
-
-        exit;
-    } else {
-        echo "<p style='color:red;'>Failed to update product!</p>";
-    }
-}
-
-// Fetch product for prefilling the form
-$product_name = $_GET["product_name"];
-$sql = "SELECT * FROM products WHERE product_name = ?";
-$stmt = $db->conn->prepare($sql);
-$stmt->bind_param("s", $product_name);
-$stmt->execute();
-$product = $stmt->get_result()->fetch_assoc();
-$stmt->close();
+require_once("../src/controller/updateController.php");
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

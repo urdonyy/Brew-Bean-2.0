@@ -1,12 +1,13 @@
 <?php
 require_once("../src/controller/controller.php");
+require_once("../database/crud.php");
 
 // Check if a product name was sent
 if (isset($_GET['product_name'])) {
     $productName = $_GET['product_name'];
 
     // Create a new Database object
-    $db = new Database();
+    $db = new crud();
 
     // Call the deleteProduct function
     if ($db->deleteProduct($productName)) {
