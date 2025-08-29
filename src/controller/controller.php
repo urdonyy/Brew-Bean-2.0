@@ -1,19 +1,16 @@
 <?php
 require_once("../database/database.php");
+require_once("../database/cart.php");
 
 $db = new Database();
+$cart = new cart($db->conn);
 
-// Get all categories
-$categories = $db->getCategories();
+// Get categories
+$categories = $cart->getCategories();
 
-// If category is selected
-$selectedCategory = isset($_GET['category']) ? $_GET['category'] : null;
-
-if ($selectedCategory === "all") {
-    $products = $db->getProducts(); // get all products
-} elseif ($selectedCategory) {
-    $products = $db->getProductsByCategory($selectedCategory);
+// Get products based on selected category
+if (isset($_GET['category']) && $_GET['category'] !== 'all') {
+    $products = $cart->getProductsByCategory($_GET['category']);
 } else {
-    $products = null;
+    $products = $cart->getProducts(); // all products
 }
-?>

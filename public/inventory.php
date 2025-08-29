@@ -1,10 +1,11 @@
 <?php
 
 require_once("../database/database.php");
+require_once("../database/crud.php");
 
 $db = new Database();
-$products = $db->displayProducts();
-
+$crud = new crud();
+$products = $crud->displayProducts();
 ?>
 
 
