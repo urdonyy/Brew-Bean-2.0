@@ -24,11 +24,12 @@ function renderCartItems() {
         orderItems.innerHTML = `
                 <div class="noItemInCart"><p>No Items in Cart.</p></div>
                 `;
+        updateBillingSummary();
         return;
-    } 
+    }
 
     //loop through cart items and display them
-    itemsInCart.forEach((item) => {
+    itemsInCart.forEach((item, index) => {
         orderItems.innerHTML += /*html*/`
                 <div class="cartContainer">
                     <div class="leftPartitionCart">
@@ -36,9 +37,16 @@ function renderCartItems() {
                             <h4> ${item.name}</h4>
                         </div> 
                         <div class="qntt"> 
-                            <button class="decrease">-</button>
-                            <p><?= "1"; ?></p><!-- hardcoded quantity, needs fixing later -->
-                            <button class="increase">+</button>
+                            <button class="decrease" data-index="${index}">-</button>
+                            <!-- <p><?= "1"; ?></p>hardcoded quantity, needs fixing later -->
+                            <input
+                                type="number"
+                                class="qtyInput"
+                                data-index="${index}"
+                                value="${item.quantity}"
+                                min="1"
+                            >
+                            <button class="increase" data-index="${index}">+</button>
                             <button class="deleteBtn">
                                 <!-- trashcan SVG -->
                                 <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +57,7 @@ function renderCartItems() {
                     </div>
                      
                     <div class="centerPartitionCart">
-                        <p>- additional info -</p>
+                        <p>-additional info-</p>
                         <h5>Size: ${item.size}</h5>
                         <h5>Sugar: ${item.sugar}</h5>
                         <h5>Price: ${item.price}</h5>
@@ -76,18 +84,28 @@ function renderCartItems() {
     })
 
     attachCartEvents();
+    updateBillingSummary();
+}
+
+function updateBillingSummary() {
+    let subtotal = 0;
+
+    itemsInCart.forEach(item => {
+        subtotal += parseFloat(item.price) * (item.quantity || 1);
+    });
+
+    let discount = 0; //static muna (WIP)
+    let vat = (subtotal - discount) * 0.12;
+    let total = subtotal - discount + vat;
+
+    document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+    document.getElementById('discount').textContent = discount.toFixed(2);
+    document.getElementById('vat').textContent = vat.toFixed(2);
+    document.getElementById('total').textContent = total.toFixed(2);
 }
 
 //rightPartition shows/hide
 function attachCartEvents() {
-    // if(e.target.classList.contains("confirmDelete")) {
-    //     const id = parseInt(cartItem.dataset.id, 10);
-    //     itemsInCart = itemsInCart.filter(item => item.id !== id);
-    //     // itemsInCart.splice(index, 1);
-    //     localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
-    //     renderCartItems();
-    // } 
-
     document.querySelectorAll(".cartContainer").forEach((cartItem, index) => {
         const deleteBtn = cartItem.querySelector(".deleteBtn");
         const confirmBtn = cartItem.querySelector(".confirmDelete");
@@ -96,7 +114,7 @@ function attachCartEvents() {
         deleteBtn.addEventListener("click", () => {
             cartItem.classList.add("showDeleteConfirm");
         });
-        
+
         confirmBtn.addEventListener("click", () => {
             itemsInCart.splice(index, 1);
             localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
@@ -110,19 +128,6 @@ function attachCartEvents() {
     });
 
 }
-    
-
-// document.querySelectorAll('.cartItem').forEach(cart => {
-//     const btn = cart.querySelector('button');
-//     btn.addEventListener('click', () => {
-//         alert('test')
-//         cart.remove();
-
-//         cartData.splice(index, 1);
-//         localStorage.setItem("cart", JSON.stringify(cartData));
-//         renderCart()
-//     });
-// })
 
 //=============================
 //handle add-to-cart form submission
@@ -181,3 +186,17 @@ printRcpt.addEventListener("click", function (event) {
 renderCartItems();
 //
 attachCartEvents();
+
+// const d = document
+
+// d.querySelector('.increase').addEventListener('click', (e) => {
+//     console.log(e)
+// })
+
+// function addValue() {
+//     console.log('test')
+// }
+
+// const addValue = () => {
+//     console.log('test')
+// }
