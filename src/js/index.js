@@ -39,7 +39,7 @@ function renderCartItems() {
                         <div class="qntt"> 
                             <button class="decrease" data-index="${index}">-</button>
                             <!-- <p><?= "1"; ?></p>hardcoded quantity, needs fixing later -->
-                            <input
+                            <input placeholder="1"
                                 type="number"
                                 class="qtyInput"
                                 data-index="${index}"
@@ -127,6 +127,58 @@ function attachCartEvents() {
         });
     });
 
+    //for qntity input billing summary update
+    document.querySelectorAll('.qtyInput').forEach(input => {
+        input.addEventListener('change', () => {
+            let index = input.dataset.index;
+            let newQty = parseInt(input.value);
+
+            if (!input.value || isNaN(newQty) || newQty < 1) {
+                newQty = 1;
+                input.value = 1;
+            }
+
+            itemsInCart[index].quantity = newQty;
+            localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
+            updateBillingSummary();
+        });
+    });
+
+    //quantity controls (+ / - btns)
+    document.querySelectorAll(".cartContainer").forEach((cartItem, index) => {
+        const qtyInput = cartItem.querySelector(".qtyInput");
+        const increaseBtn = cartItem.querySelector(".increase");
+        const decreaseBtn = cartItem.querySelector(".decrease");
+
+        //get current qty value or default to 1 if invalid
+        const getQty = () => {
+            let val = parseInt(qtyInput.value);
+            return isNaN(val) || val < 1 ? 1 : val;
+        };
+
+        //increase
+        increaseBtn.addEventListener("click", () => {
+            let currentQty = getQty();
+            let newQty = currentQty + 1;
+            // qtyInput.value = parseInt(qtyInput.value) + 1;
+            qtyInput.value = newQty;
+            itemsInCart[index].quantity = parseInt(qtyInput.value);
+            localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
+            updateBillingSummary();
+        });
+
+        //decrease
+        decreaseBtn.addEventListener("click", () => {
+            let currentQty = getQty();
+            let newQty = currentQty - 1;
+            // let newQty = parseInt(qtyInput.value) - 1;
+            if (newQty < 1) newQty = 1; //prevent 0 or negative
+            qtyInput.value = newQty;
+            itemsInCart[index].quantity = newQty;
+            localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
+            updateBillingSummary();
+        });
+    });
 }
 
 //=============================
