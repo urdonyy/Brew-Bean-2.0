@@ -153,7 +153,7 @@ a.header {
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   padding: 15px;
-  width: 290px;
+  width: 342px;
   height: 282px;
   background: #fff;
   transition: transform 0.2s;
@@ -618,17 +618,30 @@ table.billing {
   text-align: center;
   width: 30px;
   height: 30px;
-  padding: 16px 0px 16px 0px;
+  /* padding: 16px 0px 16px 0px; */
+  padding: 0;
+  line-height: 30px;
   border: 2px solid var(--secondary-color);
   border-right: none;
   border-left: none;
+}
+
+.qntt input::placeholder {
+  color: #281508;
+  font-weight: 600;
+  font-size: 12.81px;
+}
+
+.qntt input:hover {
+  cursor: pointer;
+  color: #FF0000;
 }
 
 .centerPartitionCart p {
   font-weight: 300;
   font-size: 14.1px;
   font-family: "Nata Sans", sans-serif;
-  color: #8D8989; 
+  color: #8D8989;
   width: 100%;
 }
 
