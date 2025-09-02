@@ -9,9 +9,10 @@ $crud = new crud();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
     $postData = [
-        'product_name' => $_POST['product_name'] ?? '',
+        'product' => $_POST['product'] ?? '',
         'image_filename' => $_POST['image_filename'] ?? '',
         'price' => $_POST['price'] ?? '',
+        'quantity' => $_POST['quantity'] ?? '',
         'category' => $_POST['category'] ?? ''
     ];
 

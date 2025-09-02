@@ -9,7 +9,7 @@ class crud {
     }
 
     public function displayProducts() {
-        $query = "SELECT product_name, category, price FROM products ORDER BY category DESC";
+        $query = "SELECT product, category, price, quantity FROM products ORDER BY category DESC";
         $result = $this->conn->query($query);
     
         if ($result === false) {
@@ -42,22 +42,24 @@ class crud {
     // INVENTORY - Function for adding a product (CREATE-R-U-D)
     public function addProduct($post) {
     if (
-        empty($post['product_name']) ||
+        empty($post['product']) ||
         empty($post['image_filename']) ||
         empty($post['price']) ||
+        empty($post ['quantity']) ||
         empty($post['category'])
     ) {
         return false;
     }
 
-    $product_name = $post['product_name'];
+    $product = $post['product'];
     $image_filename = $post['image_filename'];
     $price = $post['price'];
+    $quantity = $post['quantity'];
     $category = $post['category'];
 
     // SQL statement with placeholders (?)
     $stmt = $this->conn->prepare(
-        "INSERT INTO products (product_name, image_filename, price, category) VALUES (?, ?, ?, ?)"
+        "INSERT INTO products (product, image_filename, price, quantity, category) VALUES (?, ?, ?, ?, ?)"
     );
 
     if ($stmt === false) {
@@ -66,7 +68,7 @@ class crud {
     }
 
     // "ssds" binds the variables: string, string, double, string
-    $stmt->bind_param("ssds", $product_name, $image_filename, $price, $category);
+    $stmt->bind_param("ssdis", $product, $image_filename, $price, $quantity, $category);
     
     // Execute the statement
     $success = $stmt->execute();
@@ -78,14 +80,14 @@ class crud {
 }
 
     // INVENTORY - Function for deleting the product (C-R-U-DELETE)
-public function deleteProduct($product_name) {
+public function deleteProduct($product) {
   
-    $stmt = $this->conn->prepare("DELETE FROM products WHERE product_name = ?");
+    $stmt = $this->conn->prepare("DELETE FROM products WHERE product = ?");
 
     if ($stmt === false) {
         return false;
     }
-    $stmt->bind_param("s", $product_name);
+    $stmt->bind_param("s", $product);
     
     $success = $stmt->execute();
 
@@ -95,25 +97,27 @@ public function deleteProduct($product_name) {
 }
 
     // INVENTORY - Function for updating the product (C-R-UPDATE-D)
-    public function updateProduct($post, $original_product_name) {
+    public function updateProduct($post, $original_product) {
         if (
-            empty($post['product_name']) ||
+            empty($post['product']) ||
             empty($post['image_filename']) ||
             empty($post['price']) ||
+            empty($post['quantity']) ||
             empty($post['category'])
         ) {
             return false;
         }
     
-        $new_product_name = $post['product_name'];
+        $new_product = $post['product'];
         $new_image_filename = $post['image_filename'];
         $new_price = $post['price'];
+        $new_quantity = $post ['quantity'];
         $new_category = $post['category'];
     
         $stmt = $this->conn->prepare(
             "UPDATE products 
-             SET product_name = ?, image_filename = ?, price = ?, category = ? 
-             WHERE product_name = ?"
+             SET product = ?, image_filename = ?, price = ?, quantity = ?, category = ? 
+             WHERE product = ?"
         );
     
         if ($stmt === false) {
@@ -121,7 +125,7 @@ public function deleteProduct($product_name) {
         }
     
         // 5 parameters: s = string, d = double
-        $stmt->bind_param("ssdss", $new_product_name, $new_image_filename, $new_price, $new_category, $original_product_name);
+        $stmt->bind_param("ssdiss", $new_product, $new_image_filename, $new_price, $new_quantity, $new_category, $original_product);
     
         $success = $stmt->execute();
         $stmt->close();
