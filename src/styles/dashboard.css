@@ -160,7 +160,7 @@
     border: 1px solid #281508;
     border-right: none;
     width: 90px;
-    height: 132px;
+    height: 124.4px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -180,6 +180,7 @@
     border-radius: 0 10px 10px 0;
     width: 100%;
     border-left: none;
+    height: 124.4px;
 }
 
 .managementOverview h3 {
@@ -191,7 +192,7 @@
 
 .managementOverview h2 {
     color: #212121;
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 700;
     font-family: "Nata Sans", sans-serif;
 }
@@ -202,7 +203,7 @@
 
 .managementOverview p {
     color: rgba(0, 0, 0, .5);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
 }
 
