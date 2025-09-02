@@ -127,7 +127,7 @@
     /* height: 514.5px; */
     height: 215px;
     border: 1px solid rgba(212, 209, 209, 0.5);
-    border-radius: 5px;
+    border-radius: 15px;
     background: #fff;
     /* left-right, tom-bottom, blurriness, size*/
     box-shadow: 0px 0px 3.5px 0.85px rgba(212, 209, 209, 1);
@@ -156,7 +156,7 @@
 .managementOverview .managementIcon {
     background: #281508;
     padding: 41px 25px 41px 25px;
-    border-radius: 10px 0 0 10px;
+    border-radius: 15px 0 0 15px;
     border: 1px solid #281508;
     border-right: none;
     width: 90px;
@@ -177,7 +177,7 @@
     /* border: .25px solid #f2efee; */
     box-shadow: 0px 0px 3.5px 0.85px rgba(212, 209, 209, 1);
     /* box-shadow: 1px 1px 15px 0.05px rgba(161, 161, 161, 0.75); */
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 15px 15px 0;
     width: 100%;
     border-left: none;
     height: 124.4px;
@@ -214,15 +214,27 @@
     gap: 20px;
 }
 
-.secondBox .sbChild {
-    width: 723px;
-    height: 247.5px;
+.secondBox .graph {
+    /* width: 586px; */
+    width: 657.53px;
+    height: 261.5px;
     background: #fff;
     /* border: 0.25px solid #8b8b8b;
     box-shadow: 1px 1px 15px 0.01px rgba(161, 161, 161, 0.35); */
     border: 1px solid rgba(212, 209, 209, 0.5);
     box-shadow: 0px 0px 3.5px 0.85px rgba(212, 209, 209, 1);
-    border-radius: 5px;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.secondBox .bestSelling {
+    /* max-width: 519px; */
+    width: 557.53px;
+    height: 261.5px;
+    background: #fff;
+    border: 1px solid rgba(212, 209, 209, 0.5);
+    box-shadow: 0px 0px 3.5px 0.85px rgba(212, 209, 209, 1);
+    border-radius: 15px;
     padding: 20px;
 }
 
@@ -230,10 +242,10 @@
     /* width: 1117px; */
     height: 397px;
     border: 1px solid rgba(212, 209, 209, 0.5);
-    border-radius: 5px;
+    border-radius: 15px;
     /* margin-top: 20px; */
     background: #fff;
-    box-shadow: 0px 0px 3.5px 0.85px rgba(212, 209, 209, 1);
+    box-shadow: 0px 0px 5px 0.50px rgba(212, 209, 209, 1);
     padding: 20px;
 }
 
@@ -242,4 +254,68 @@
     font-size: 24px;
     font-weight: 600;
     font-family: "Nata Sans", sans-serif;
+}
+
+.bestSelling .bestSellingItemContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0 20px 0;
+    /* position: relative; */
+}
+
+.bestSellingImage {
+    width: 169px;
+    height: 169px;
+    max-width: 169px;
+    max-height: 169px;
+}
+
+.bestSellingImage img {
+    width: inherit;
+    height: inherit;
+    border-radius: 15px;
+}
+
+.bestSellingItem {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* max-width: 277px; */
+    width: 100%;
+    /* max-height: 29px; */
+    height: 100%;
+    /* position: absolute;
+    transform: translate(68%, -234%); */
+}
+
+.bestSellingItemContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 10px 5px;
+    border: 1px solid rgba(212, 209, 209, 0.5);
+    box-shadow: 0px 2px 5px 0.75px rgb(215, 213, 213);
+    border-radius: 15px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+}
+
+.latestOrder {
+    width: 100%;
+}
+
+.latestOrder table,
+td,
+tr {
+    padding: 20px;
+    width: 100%;
+}
+
+.latestOrder td {
+    width: 100%;
 }
