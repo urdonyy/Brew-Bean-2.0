@@ -117,7 +117,7 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
                                     <!-- <div class="card">
                                         <img src="assets/images/<?php echo htmlspecialchars($prod['image_filename']); ?>"
                                             alt="picture" width="150" height="150">
-                                        <h4><?php echo htmlspecialchars($prod['product_name']); ?></h4>
+                                        <h4><?php echo htmlspecialchars($prod['product']); ?></h4>
                                         <p>₱<?php echo number_format($prod['price'], 2); ?></p>
                                     </div> -->
 
@@ -127,7 +127,7 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
                                             <img src="assets/images/<?php echo htmlspecialchars($prod['image_filename']); ?>"
                                                 alt="picture" width="150" height="150">
                                             <div class="if-second-card">
-                                                <h4><?php echo htmlspecialchars($prod['product_name']); ?></h4>
+                                                <h4><?php echo htmlspecialchars($prod['product']); ?></h4>
                                                 <p>₱<?php echo number_format($prod['price'], 2); ?></p>
                                             </div>
 
@@ -137,7 +137,7 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
                                             <input type="hidden" name="price"
                                                 value="<?php echo number_format($prod['price'], 2); ?>">
                                             <input type="hidden" name="name"
-                                                value="<?php echo htmlspecialchars($prod['product_name']); ?>">
+                                                value="<?php echo htmlspecialchars($prod['product']); ?>">
                                             <div class="item-properties">
                                                 <div class="item-properties-card">
                                                     <p class="title">

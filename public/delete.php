@@ -3,8 +3,8 @@ require_once("../src/controller/controller.php");
 require_once("../database/crud.php");
 
 // Check if a product name was sent
-if (isset($_GET['product_name'])) {
-    $productName = $_GET['product_name'];
+if (isset($_GET['product'])) {
+    $productName = $_GET['product'];
 
     // Create a new Database object
     $db = new crud();

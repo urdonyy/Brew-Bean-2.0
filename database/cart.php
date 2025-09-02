@@ -9,7 +9,7 @@ class cart {
         $this->conn = $conn;
     }
 
-    public function getProducts() {
+    public function getProducts() {                                                             
         return $this->conn->query("SELECT * FROM products");
     }
 
@@ -18,7 +18,7 @@ class cart {
     }
 
     public function getProductsByCategory($category) {
-        $stmt = $this->conn->prepare("SELECT product_name, price, image_filename FROM products WHERE category = ?");
+        $stmt = $this->conn->prepare("SELECT product, price, image_filename FROM products WHERE category = ?");
         $stmt->bind_param("s", $category);
         $stmt->execute();
         return $stmt->get_result();

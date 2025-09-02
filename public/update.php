@@ -40,7 +40,7 @@ require_once("../src/controller/updateController.php");
                         <div class="coffee-info">
                             <h2>Product Name & File Name</h2>
                             <label>Item Name</label>
-                            <input type="text" name="product_name" value="<?= htmlspecialchars($product['product_name']) ?>" required>
+                            <input type="text" name="product" value="<?= htmlspecialchars($product['product']) ?>" required>
                             <label>File Name</label>
                             <input type="text" name="image_filename" value="<?= htmlspecialchars($product['image_filename']) ?>" required>
                         </div>
@@ -66,7 +66,7 @@ require_once("../src/controller/updateController.php");
                         <div class="coffee-quantity">
                             <h2>Stock Quantity</h2>
                             <label>Quantity</label>
-                            <input type="number">
+                            <input type="number" name="quantity" step="0.1" value="<?= htmlspecialchars($product['quantity']) ?>"required>
                         </div>
                         <div class="btns">
                             <button class="cancel" type="button" onclick="window.location.href='inventory.php'">Cancel</button>
