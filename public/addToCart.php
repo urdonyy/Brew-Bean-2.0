@@ -86,14 +86,14 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
 
                             <?php while ($cat = $categories->fetch_assoc()): ?>
                                 <?php
-                                $categoryName = $cat['category'];
+                                $categoryName = $cat['name'];
+                                $categoryId = $cat['id'];
                                 $icon = $icons[$categoryName]['svg'] ?? '';
                                 ?>
-
-                                <a class="header<?php echo (isset($_GET['category']) && $_GET['category'] === $categoryName) ? ' active' : ''; ?>"
-                                    href="?category=<?php echo urlencode($categoryName); ?>">
-                                    <?php echo $icon; ?>
-                                    <?php echo htmlspecialchars($categoryName); ?>
+                                <a class="header<?php echo (isset($_GET['category']) && $_GET['category'] == $categoryId) ? ' active' : ''; ?>"
+                                href="?category=<?php echo $categoryId; ?>">
+                                <?php echo $icon; ?>
+                                <?php echo htmlspecialchars($categoryName); ?>
                                 </a>
                             <?php endwhile; ?>
 

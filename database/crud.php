@@ -9,7 +9,7 @@ class crud {
     }
 
     public function displayProducts() {
-        $query = "SELECT product, category, price, quantity FROM products ORDER BY category DESC";
+        $query = "SELECT product, categories_id, price, quantity FROM products ORDER BY categories_id DESC";
         $result = $this->conn->query($query);
     
         if ($result === false) {
@@ -46,7 +46,7 @@ class crud {
         empty($post['image_filename']) ||
         empty($post['price']) ||
         empty($post ['quantity']) ||
-        empty($post['category'])
+        empty($post['categories_id'])
     ) {
         return false;
     }
@@ -55,11 +55,11 @@ class crud {
     $image_filename = $post['image_filename'];
     $price = $post['price'];
     $quantity = $post['quantity'];
-    $category = $post['category'];
+    $categories_id = $post['categories_id'];
 
     // SQL statement with placeholders (?)
     $stmt = $this->conn->prepare(
-        "INSERT INTO products (product, image_filename, price, quantity, category) VALUES (?, ?, ?, ?, ?)"
+        "INSERT INTO products (product, image_filename, price, quantity, categories_id) VALUES (?, ?, ?, ?, ?)"
     );
 
     if ($stmt === false) {
@@ -68,7 +68,7 @@ class crud {
     }
 
     // "ssds" binds the variables: string, string, double, string
-    $stmt->bind_param("ssdis", $product, $image_filename, $price, $quantity, $category);
+    $stmt->bind_param("ssdis", $product, $image_filename, $price, $quantity, $categories_id);
     
     // Execute the statement
     $success = $stmt->execute();
@@ -103,7 +103,7 @@ public function deleteProduct($product) {
             empty($post['image_filename']) ||
             empty($post['price']) ||
             empty($post['quantity']) ||
-            empty($post['category'])
+            empty($post['categories_id'])
         ) {
             return false;
         }
@@ -112,11 +112,11 @@ public function deleteProduct($product) {
         $new_image_filename = $post['image_filename'];
         $new_price = $post['price'];
         $new_quantity = $post ['quantity'];
-        $new_category = $post['category'];
+        $new_categories_id = $post['categories_id'];
     
         $stmt = $this->conn->prepare(
             "UPDATE products 
-             SET product = ?, image_filename = ?, price = ?, quantity = ?, category = ? 
+             SET product = ?, image_filename = ?, price = ?, quantity = ?, categories_id = ? 
              WHERE product = ?"
         );
     
@@ -125,7 +125,7 @@ public function deleteProduct($product) {
         }
     
         // 5 parameters: s = string, d = double
-        $stmt->bind_param("ssdiss", $new_product, $new_image_filename, $new_price, $new_quantity, $new_category, $original_product);
+        $stmt->bind_param("ssdiss", $new_product, $new_image_filename, $new_price, $new_quantity, $new_categories_id, $original_product);
     
         $success = $stmt->execute();
         $stmt->close();

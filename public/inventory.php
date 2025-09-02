@@ -59,7 +59,7 @@ Add Item</button></a>
                 <?php foreach ($products as $product): ?>
                     <tr>
                         <td><?= htmlspecialchars($product['product']) ?></td>
-                        <td><?= htmlspecialchars($product['category']) ?></td>
+                        <td><?= htmlspecialchars($product['categories_id']) ?></td>
                         <td><?= htmlspecialchars($product['price']) ?></td>
                         <td><?= htmlspecialchars($product['quantity']) ?></td>
                         <td>
