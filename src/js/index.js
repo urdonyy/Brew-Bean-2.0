@@ -91,17 +91,23 @@ function updateBillingSummary() {
     let subtotal = 0;
 
     itemsInCart.forEach(item => {
-        subtotal += parseFloat(item.price) * (item.quantity || 1);
+        let formattedPrice = item.price.replace(",", "");
+        subtotal += parseFloat(formattedPrice) * (item.quantity || 1);
     });
 
     let discount = 0; //static muna (WIP)
     let vat = (subtotal - discount) * 0.12;
     let total = subtotal - discount + vat;
 
-    document.getElementById('subtotal').textContent = subtotal.toFixed(2);
-    document.getElementById('discount').textContent = discount.toFixed(2);
-    document.getElementById('vat').textContent = vat.toFixed(2);
-    document.getElementById('total').textContent = total.toFixed(2);
+    const minMaxFractionDigits = {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }
+
+    document.getElementById('subtotal').textContent = subtotal.toLocaleString("en-US", minMaxFractionDigits);
+    document.getElementById('discount').textContent = discount.toLocaleString("en-US", minMaxFractionDigits);
+    document.getElementById('vat').textContent = vat.toLocaleString("en-US", minMaxFractionDigits);
+    document.getElementById('total').textContent = total.toLocaleString("en-US", minMaxFractionDigits);
 }
 
 //rightPartition shows/hide

@@ -299,6 +299,15 @@ input#search-product {
   font-weight: 600;
 }
 
+.if-second-card h5 {
+  position: absolute;
+  bottom: 25.5px;
+  font-family: "Nata Sans", sans-serif;
+  color: #281508;
+  font-size: 18px;
+  font-weight: 600;
+}
+
 .item-properties {
   display: flex;
   justify-content: space-between;
@@ -385,7 +394,7 @@ input#search-product {
   width: 70%;
   height: 100vh;
   position: sticky;
-  top: 6px;
+  top: 0;
   /* border: 1px solid black; */
   padding: 20px;
   padding-left: 0px;

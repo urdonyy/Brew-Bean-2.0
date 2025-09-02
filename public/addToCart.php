@@ -114,11 +114,17 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
                             <!-- Product Cards -->
                             <div class="card-container">
                                 <?php while ($prod = $products->fetch_assoc()): ?>
+                                    <!-- <?php
+                                    echo "<pre>";
+                                    print_r($prod);
+                                    echo "</pre>";
+                                    ?> -->
                                     <!-- <div class="card">
                                         <img src="assets/images/<?php echo htmlspecialchars($prod['image_filename']); ?>"
                                             alt="picture" width="150" height="150">
                                         <h4><?php echo htmlspecialchars($prod['product']); ?></h4>
                                         <p>₱<?php echo number_format($prod['price'], 2); ?></p>
+                                        <p><?php echo htmlspecialchars($prod['quantity']); ?></p>
                                     </div> -->
 
                                     <!-- data-id="<?= $prod['id']; ?>" -->
@@ -128,6 +134,7 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
                                                 alt="picture" width="150" height="150">
                                             <div class="if-second-card">
                                                 <h4><?php echo htmlspecialchars($prod['product']); ?></h4>
+                                                <h5>Stock: <?php echo htmlspecialchars($prod['quantity']); ?></h5>
                                                 <p>₱<?php echo number_format($prod['price'], 2); ?></p>
                                             </div>
 
@@ -290,7 +297,7 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
                                 <div>₱<span id="subtotal">0.00</span></div>
                             </h4>
                             <h6>
-                                Discount(10%): 
+                                Discount(10%):
                                 <div>₱<span id="discount">0.00</span></div>
                             </h6>
                             <h6>
