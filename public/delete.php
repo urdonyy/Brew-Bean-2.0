@@ -3,14 +3,14 @@ require_once("../src/controller/controller.php");
 require_once("../database/crud.php");
 
 // Check if a product name was sent
-if (isset($_GET['product'])) {
-    $productName = $_GET['product'];
+if (isset($_GET['id'])) {
+    $productId = $_GET['id'];
 
     // Create a new Database object
     $db = new crud();
 
     // Call the deleteProduct function
-    if ($db->deleteProduct($productName)) {
+    if ($db->deleteProduct($productId)) {
         // Redirect back to the inventory page with a success message
         header("Location: inventory.php?status=deleted");
         exit();

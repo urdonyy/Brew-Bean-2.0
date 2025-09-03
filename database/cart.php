@@ -14,12 +14,12 @@ class cart {
     }
 
     public function getCategories() {
-        return $this->conn->query("SELECT DISTINCT category FROM products");
+        return $this->conn->query("SELECT id, name FROM categories ORDER BY name ASC");
     }
 
-        public function getProductsByCategory($category) {
-            $stmt = $this->conn->prepare("SELECT product, price,quantity, image_filename FROM products WHERE category = ?");
-        $stmt->bind_param("s", $category);
+    public function getProductsByCategory($categoryId) {
+        $stmt = $this->conn->prepare("SELECT product, price, image_filename, quantity FROM products WHERE categories_id = ?");
+        $stmt->bind_param("i", $categoryId);
         $stmt->execute();
         return $stmt->get_result();
     }

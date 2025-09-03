@@ -13,8 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'image_filename' => $_POST['image_filename'] ?? '',
         'price' => $_POST['price'] ?? '',
         'quantity' => $_POST['quantity'] ?? '',
-        'category' => $_POST['category'] ?? ''
+        'categories_id' => $_POST['category'] ?? ''   
     ];
+    
 
    
     if ($crud->addProduct($postData)) {
