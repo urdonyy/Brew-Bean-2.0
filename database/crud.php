@@ -9,7 +9,11 @@ class crud {
     }
 
     public function displayProducts() {
-        $query = "SELECT product, category, price, quantity FROM products ORDER BY category DESC";
+        $query = "SELECT p.id, p.product, c.name AS category_name, p.price, p.quantity 
+                  FROM products p
+                  JOIN categories c ON p.categories_id = c.id
+                  ORDER BY p.categories_id DESC";
+        
         $result = $this->conn->query($query);
     
         if ($result === false) {
@@ -24,14 +28,15 @@ class crud {
             }
         }
     
-        return $data; // Will be empty if no results
+        return $data;
     }
+    
     
 
     //Get Product Id 
     public function getProductbyID($id){
 
-        $stmt = $this->conn->prepare("SELECT * FROM product WHERE id = ?");
+        $stmt = $this->conn->prepare("SELECT * FROM products WHERE id = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -46,7 +51,7 @@ class crud {
         empty($post['image_filename']) ||
         empty($post['price']) ||
         empty($post ['quantity']) ||
-        empty($post['category'])
+        empty($post['categories_id'])
     ) {
         return false;
     }
@@ -55,11 +60,11 @@ class crud {
     $image_filename = $post['image_filename'];
     $price = $post['price'];
     $quantity = $post['quantity'];
-    $category = $post['category'];
+    $categories_id = $post['categories_id'];
 
     // SQL statement with placeholders (?)
     $stmt = $this->conn->prepare(
-        "INSERT INTO products (product, image_filename, price, quantity, category) VALUES (?, ?, ?, ?, ?)"
+        "INSERT INTO products (product, image_filename, price, quantity, categories_id) VALUES (?, ?, ?, ?, ?)"
     );
 
     if ($stmt === false) {
@@ -68,7 +73,7 @@ class crud {
     }
 
     // "ssds" binds the variables: string, string, double, string
-    $stmt->bind_param("ssdis", $product, $image_filename, $price, $quantity, $category);
+    $stmt->bind_param("ssdii", $product, $image_filename, $price, $quantity, $categories_id);
     
     // Execute the statement
     $success = $stmt->execute();
@@ -80,58 +85,67 @@ class crud {
 }
 
     // INVENTORY - Function for deleting the product (C-R-U-DELETE)
-public function deleteProduct($product) {
-  
-    $stmt = $this->conn->prepare("DELETE FROM products WHERE product = ?");
-
-    if ($stmt === false) {
-        return false;
+    public function deleteProduct($id) {
+        $stmt = $this->conn->prepare("DELETE FROM products WHERE id = ?");
+        if ($stmt === false) {
+            return false;
+        }
+        $stmt->bind_param("i", $id);
+        $success = $stmt->execute();
+        $stmt->close();
+        return $success;
     }
-    $stmt->bind_param("s", $product);
     
-    $success = $stmt->execute();
-
-    $stmt->close();
-    
-    return $success;
-}
 
     // INVENTORY - Function for updating the product (C-R-UPDATE-D)
-    public function updateProduct($post, $original_product) {
+    public function updateProduct($post, $product_id) {
+        // Validate required fields
         if (
             empty($post['product']) ||
             empty($post['image_filename']) ||
             empty($post['price']) ||
             empty($post['quantity']) ||
-            empty($post['category'])
+            empty($post['categories_id'])
         ) {
             return false;
         }
     
-        $new_product = $post['product'];
+        // Extract new values
+        $new_product       = $post['product'];
         $new_image_filename = $post['image_filename'];
-        $new_price = $post['price'];
-        $new_quantity = $post ['quantity'];
-        $new_category = $post['category'];
+        $new_price          = (float)$post['price'];
+        $new_quantity       = (int)$post['quantity'];
+        $new_categories_id  = (int)$post['categories_id'];
     
+        // Prepare query
         $stmt = $this->conn->prepare(
             "UPDATE products 
-             SET product = ?, image_filename = ?, price = ?, quantity = ?, category = ? 
-             WHERE product = ?"
+             SET product = ?, image_filename = ?, price = ?, quantity = ?, categories_id = ? 
+             WHERE id = ?"
         );
     
         if ($stmt === false) {
             return false;
         }
     
-        // 5 parameters: s = string, d = double
-        $stmt->bind_param("ssdiss", $new_product, $new_image_filename, $new_price, $new_quantity, $new_category, $original_product);
+        // Bind parameters: s = string, s = string, d = double, i = int, i = int, i = int
+        $stmt->bind_param(
+            "ssdiii",
+            $new_product,
+            $new_image_filename,
+            $new_price,
+            $new_quantity,
+            $new_categories_id,
+            $product_id
+        );
     
+        // Execute and close
         $success = $stmt->execute();
         $stmt->close();
     
         return $success;
     }
+    
     
 }
 

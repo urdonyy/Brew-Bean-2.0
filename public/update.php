@@ -30,6 +30,7 @@ require_once("../src/controller/updateController.php");
                 <h1>Inventory > Update Item</h1>
             </div>
             <form method="post">
+            <input type="hidden" name="id" value="<?= htmlspecialchars($product['id']) ?>">
                 <h1>
                     Update Details
                 </h1>
@@ -47,10 +48,10 @@ require_once("../src/controller/updateController.php");
                         <div class="coffee-category">
                             <h2>Category</h2>
                             <label>Item Category</label>
-                                <select name="category" required>
-                                <option value="Hot Coffee" <?= ($product['category'] == 'Hot Coffee') ? 'selected' : '' ?>>Hot Coffee</option>
-                                <option value="Cold Coffee" <?= ($product['category'] == 'Cold Coffee') ? 'selected' : '' ?>>Cold Coffee</option>
-                                <option value="Non-Coffee" <?= ($product['category'] == 'Non-Coffee') ? 'selected' : '' ?>>Non-Coffee</option>
+                                <select name="categories_id" required>
+                                <option value="2" <?= ($product['categories_id'] == '2') ? 'selected' : '' ?>>Hot Coffee</option>
+                                <option value="1" <?= ($product['categories_id'] == '1') ? 'selected' : '' ?>>Cold Coffee</option>
+                                <option value="3" <?= ($product['categories_id'] == '3') ? 'selected' : '' ?>>Non-Coffee</option>
                                 </select>
 
                         </div>
