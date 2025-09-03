@@ -225,6 +225,8 @@
     box-shadow: 0px 0px 3.5px 0.85px rgba(212, 209, 209, 1);
     border-radius: 15px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .secondBox .bestSelling {
@@ -298,24 +300,84 @@
     background: #fff;
     padding: 10px 5px;
     border: 1px solid rgba(212, 209, 209, 0.5);
-    box-shadow: 0px 2px 5px 0.75px rgb(215, 213, 213);
+    box-shadow: 0px 10px 7px -7.25px rgb(215, 213, 213);
     border-radius: 15px;
     border-top: none;
     border-right: none;
     border-left: none;
 }
 
-.latestOrder {
+.latestOrders table {
     width: 100%;
+    border-collapse: collapse;
+    text-align: left;
 }
 
-.latestOrder table,
-td,
-tr {
-    padding: 20px;
-    width: 100%;
+thead {
+    border-radius: 15px;
+    text-align: center;
 }
 
-.latestOrder td {
-    width: 100%;
+table thead th:first-of-type {
+    border-radius: 15px 0 0 15px;
+}
+
+table thead th:last-of-type {
+    border-radius: 0 15px 15px 0;
+}
+
+table th {
+    padding: 16px;
+    width: 100px;
+    background-color: rgba(243, 222, 195, .45);
+    font-family: "Nata Sans", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #281508;
+}
+
+tbody td {
+    padding: 20px 0 10px 0;
+    border-bottom: 1px solid rgba(224, 224, 224, 0.5);
+    border-width: 1.75px;
+    font-family: "Nata Sans", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #2d2d2d;
+}
+
+tbody {
+    text-align: center;
+}
+
+thead svg path {
+    fill: #281508;
+}
+
+.graphContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 500px !important;
+    margin: auto;
+}
+
+.graphContainer select {
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, .5);
+    border: none;
+    outline: none;
+}
+
+.graphDropDown {
+    align-self: flex-end;
+    padding-bottom: 10px;
+}
+
+#weeklyChart {
+    width: 100% !important;
+    height: 150px !important;
 }
