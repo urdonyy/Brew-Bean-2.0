@@ -117,16 +117,47 @@ require_once("../src/controller/controller.php");
             </div>
 
             <div class="secondBox">
-                <div class="sbChild">
-                    <h1>Hottest Item</h1>
+                <div class="graph">
+                    <h1>Graph</h1>
                 </div>
-                <div class="sbChild">
-                    <h1>Hottest Item</h1>
+                <div class="bestSelling">
+                    <h1>Best Selling</h1>
+                    <div class="bestSellingItemContainer">
+                        <div class="bestSellingImage">
+                            <img src="../../public/assets/images/cappuccino.jpg">
+                        </div>
+                        <div class="bestSellingItem">
+                            <div class="bestSellingItemContent">
+                                <h4>Name:</h4>
+                                <p>Classic Cappucino</p>
+                            </div>
+                            <div class="bestSellingItemContent">
+                                <h4>Available Stocks:</h4>
+                                <p>20</p>
+                            </div>
+                            <div class="bestSellingItemContent">
+                                <h4>Total Orders:</h4>
+                                <p>100</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="thirdBox">
                 <h1>Latest Orders</h1>
+                <div class="latestOrders">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Order ID</td>
+                                <td>Customer Name</td>
+                                <td>Price</td>
+                                <td>Date</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
