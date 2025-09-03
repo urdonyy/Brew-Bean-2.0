@@ -59,11 +59,11 @@ Add Item</button></a>
                 <?php foreach ($products as $product): ?>
                     <tr>
                         <td><?= htmlspecialchars($product['product']) ?></td>
-                        <td><?= htmlspecialchars($product['categories_id']) ?></td>
+                        <td><?= htmlspecialchars($product['category_name']) ?></td>
                         <td><?= htmlspecialchars($product['price']) ?></td>
                         <td><?= htmlspecialchars($product['quantity']) ?></td>
                         <td>
-                            <a href="update.php?product=<?= urlencode($product['product']) ?>">
+                            <a href="update.php?id=<?= urlencode($product['id']) ?>">
 
                                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.5 3H5.5C4.96957 3 4.46086 3.21071 4.08579 3.58579C3.71071 3.96086 3.5 4.46957 3.5 5V19C3.5 19.5304 3.71071 20.0391 4.08579 20.4142C4.46086 20.7893 4.96957 21 5.5 21H19.5C20.0304 21 20.5391 20.7893 20.9142 20.4142C21.2893 20.0391 21.5 19.5304 21.5 19V12" stroke="#006633" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -72,7 +72,7 @@ Add Item</button></a>
                             </a>
                         </td>
                         <td>
-                        <a href="delete.php?product=<?= urlencode($product['product']) ?>" onclick="return confirm('Are you sure you want to delete this product?');">
+                        <a href="delete.php?id=<?= urlencode($product['id']) ?>" onclick="return confirm('Are you sure you want to delete this product?');">
                         <svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5.086 0.586C5.46099 0.210901 5.96961 0.000113275 6.5 0H10.5C11.0304 0 11.5391 0.210714 11.9142 0.585786C12.2893 0.960859 12.5 1.46957 12.5 2V4H15.5C15.7652 4 16.0196 4.10536 16.2071 4.29289C16.3946 4.48043 16.5 4.73478 16.5 5C16.5 5.26522 16.3946 5.51957 16.2071 5.70711C16.0196 5.89464 15.7652 6 15.5 6V18C15.5 18.5304 15.2893 19.0391 14.9142 19.4142C14.5391 19.7893 14.0304 20 13.5 20H3.5C2.96957 20 2.46086 19.7893 2.08579 19.4142C1.71071 19.0391 1.5 18.5304 1.5 18V6C1.23478 6 0.98043 5.89464 0.792893 5.70711C0.605357 5.51957 0.5 5.26522 0.5 5C0.5 4.73478 0.605357 4.48043 0.792893 4.29289C0.98043 4.10536 1.23478 4 1.5 4H4.5V2C4.50011 1.46961 4.7109 0.960985 5.086 0.586ZM6.5 4H10.5V2H6.5V4ZM7.5 8C7.5 7.73478 7.39464 7.48043 7.20711 7.29289C7.01957 7.10536 6.76522 7 6.5 7C6.23478 7 5.98043 7.10536 5.79289 7.29289C5.60536 7.48043 5.5 7.73478 5.5 8V16C5.5 16.2652 5.60536 16.5196 5.79289 16.7071C5.98043 16.8946 6.23478 17 6.5 17C6.76522 17 7.01957 16.8946 7.20711 16.7071C7.39464 16.5196 7.5 16.2652 7.5 16V8ZM11.5 8C11.5 7.73478 11.3946 7.48043 11.2071 7.29289C11.0196 7.10536 10.7652 7 10.5 7C10.2348 7 9.98043 7.10536 9.79289 7.29289C9.60536 7.48043 9.5 7.73478 9.5 8V16C9.5 16.2652 9.60536 16.5196 9.79289 16.7071C9.98043 16.8946 10.2348 17 10.5 17C10.7652 17 11.0196 16.8946 11.2071 16.7071C11.3946 16.5196 11.5 16.2652 11.5 16V8Z" fill="#FF0000"/>
                         </svg>

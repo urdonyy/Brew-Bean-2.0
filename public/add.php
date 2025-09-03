@@ -42,8 +42,8 @@ require_once("../src/controller/addController.php");
                             <label>Item Category</label>
                             <select name="category" required>
                                 <option disabled selected>Coffee</option>
-                                <option value="2">Hot Coffee</option>
                                 <option value="1">Cold Coffee</option>
+                                <option value="2">Hot Coffee</option>
                                 <option value="3">Non-Coffee</option>
                             </select>
                         </div>

@@ -3,29 +3,36 @@
 require_once("../database/database.php");
 require_once ("../database/crud.php");
 
-$db = new Database();
-$crud = new crud();
+    $db = new Database();
+    $crud = new crud();
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $original_product = $_GET['product']; // keep track of original
-    $result = $crud->updateProduct($_POST, $original_product);
+$product_id = $_GET["id"] ?? null;
 
-    if ($result) {
-        echo "<script>alert('Product added successfully!'); window.location.href='inventory.php'</script>";
-
-        exit;
-    } else {
-        echo "<p style='color:red;'>Failed to update product!</p>";
-    }
+if ($product_id === null) {
+    die("No product ID provided.");
 }
 
-// Fetch product for prefilling the form
-$product = $_GET["product"];
-$sql = "SELECT * FROM products WHERE product = ?";
-$stmt = $db->conn->prepare($sql);
-$stmt->bind_param("s", $product);
-$stmt->execute();
-$product = $stmt->get_result()->fetch_assoc();
-$stmt->close();
-?>
+    $sql = "SELECT * FROM products WHERE id = ?";
+    $stmt = $db->conn->prepare($sql);
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $product = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+
+if (!$product) {
+     die("Product not found.");
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $updated = $crud->updateProduct($_POST, $product_id);
+
+    if ($updated) {
+        // Redirect back to inventory page after success
+        header("Location: inventory.php?msg=updated");
+        exit;
+    } else {
+        echo "<p style='color:red'>Update failed. Please check your input.</p>";
+    }
+
+}
