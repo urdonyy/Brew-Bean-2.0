@@ -17,8 +17,8 @@ class cart {
         return $this->conn->query("SELECT DISTINCT category FROM products");
     }
 
-    public function getProductsByCategory($category) {
-        $stmt = $this->conn->prepare("SELECT product, price, image_filename FROM products WHERE category = ?");
+        public function getProductsByCategory($category) {
+            $stmt = $this->conn->prepare("SELECT product, price,quantity, image_filename FROM products WHERE category = ?");
         $stmt->bind_param("s", $category);
         $stmt->execute();
         return $stmt->get_result();
