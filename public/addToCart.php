@@ -52,6 +52,7 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
     <title>Brew & Bean 2.0</title>
     <link rel="stylesheet" href="../src/styles/addCart.css">
     <link rel="stylesheet" href="../src/styles/global.css">
+    <link rel="stylesheet" href="../src/styles/modal.css">
 </head>
 
 <body>
@@ -314,17 +315,87 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
                             <button class="print" type="submit" name="submit">Print Receipt</button>
                         </div>
                     </div>
-
-
-                </div>
+            </div>
 
             </div>
 
 
+                
+                      
+            
+            
+            
         </main>
     </div>
-    <script src="../src/js/index.js"></script>
 
+     <!-- modal section --> 
+    <div class="modal">
+
+        <div class="modalContent">
+            
+            <div class="closeBtn">
+                <button>X</button>
+            </div>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32" d="M160 336V48l32 16l32-16l31.94 16l32.37-16L320 64l31.79-16l31.93 16L416 48l32.01 16L480 48v224"/><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32" d="M480 272v112a80 80 0 0 1-80 80a80 80 0 0 1-80-80v-48H48a15.86 15.86 0 0 0-16 16c0 64 6.74 112 80 112h288"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M224 144h192m-128 80h128"/></svg>
+            <h1 class="brew">Your order is on its way!</h1>
+            <h2 class="bean">Brew & Bean</h2>
+            
+            <p>Address: 123 Lorem Ipsum, Makati City</p>
+            <p class="jollibee">Tel: 8-7000</p>
+            
+        <div class="summary">
+            <p class ="paymentSum">PAYMENT SUMMARY</p>
+
+            <div class="table">
+                <table class="tableContainer">
+
+                    <thead class="tableHead">
+                        <tr>
+                            <th>ITEMS</th>
+                            <th>QUANTITY</th>
+                            <th>PRICE</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="tableBody">
+                        <tr>
+                            <td>Kape</td>
+                            <td>1</td>
+                            <td>100.00</td>
+                        </tr>
+                        <tr>
+                            <td>Kape</td>
+                            <td>1</td>
+                            <td>100.00</td>
+                        </tr>
+                        <tr>
+                            <td>Kape</td>
+                            <td>1</td>
+                            <td>100.00</td>
+                        </tr>
+                        <tr class="lastRow">
+                            <td>Kape</td>
+                            <td>1</td>
+                            <td>100.00</td>
+                        </tr>
+                    </tbody>
+                    
+                </table>
+            </div>
+
+            <div class="sf">Delivery Fee</div>
+            <div class="total">Total</div>
+        </div>
+
+            <div class="barcodeImg">
+            <img src="barcode.gif" alt="bar code"> </div>
+        </div>
+    </div>   
+    </div>
+    <!-- <script src="modal.js"></script> -->
+    <script src="../src/js/index.js"></script>
+    <script src="../src/js/printModal.js"></script>
 </body>
 
 </html>
