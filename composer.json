@@ -1,0 +1,24 @@
+{
+    "name": "pisopay-ivan/coffee",
+    "autoload": {
+        "psr-4": {
+            "PisopayIvan\\Coffee\\": "src/",
+            "App\\Database\\": "database/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ivan Allen Macabontoc",
+            "email": "ivan_dev@my.pisopay.com.ph"
+        }
+    ],
+    "require": {},
+    "scripts": {
+        "start:dev": "php -S localhost:8060",
+        "migrate": "php database/RunMigration.php",
+        "rollback": "php database/RunRollback.php",
+        "seed": "php database/RunSeeder.php",
+        "db:fresh": "composer rollback && composer migrate"
+
+    }
+}
