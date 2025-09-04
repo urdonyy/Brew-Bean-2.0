@@ -86,16 +86,16 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
                             </a>
 
                             <?php while ($cat = $categories->fetch_assoc()): ?>
-                                <?php
+                            <?php
                                 $categoryName = $cat['name'];
                                 $categoryId = $cat['id'];
                                 $icon = $icons[$categoryName]['svg'] ?? '';
                                 ?>
-                                <a class="header<?php echo (isset($_GET['category']) && $_GET['category'] == $categoryId) ? ' active' : ''; ?>"
+                            <a class="header<?php echo (isset($_GET['category']) && $_GET['category'] == $categoryId) ? ' active' : ''; ?>"
                                 href="?category=<?php echo $categoryId; ?>">
                                 <?php echo $icon; ?>
                                 <?php echo htmlspecialchars($categoryName); ?>
-                                </a>
+                            </a>
                             <?php endwhile; ?>
 
                         </div>
@@ -110,17 +110,17 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
 
                     <?php if (isset($_GET['category'])): ?>
 
-                        <?php if ($products): ?>
+                    <?php if ($products): ?>
 
-                            <!-- Product Cards -->
-                            <div class="card-container">
-                                <?php while ($prod = $products->fetch_assoc()): ?>
-                                    <!-- <?php
+                    <!-- Product Cards -->
+                    <div class="card-container">
+                        <?php while ($prod = $products->fetch_assoc()): ?>
+                        <!-- <?php
                                     echo "<pre>";
                                     print_r($prod);
                                     echo "</pre>";
                                     ?> -->
-                                    <!-- <div class="card">
+                        <!-- <div class="card">
                                         <img src="assets/images/<?php echo htmlspecialchars($prod['image_filename']); ?>"
                                             alt="picture" width="150" height="150">
                                         <h4><?php echo htmlspecialchars($prod['product']); ?></h4>
@@ -128,90 +128,90 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
                                         <p><?php echo htmlspecialchars($prod['quantity']); ?></p>
                                     </div> -->
 
-                                    <!-- data-id="<?= $prod['id']; ?>" -->
-                                    <div class="card">
-                                        <div class="item-description">
-                                            <img src="assets/images/<?php echo htmlspecialchars($prod['image_filename']); ?>"
-                                                alt="picture" width="150" height="150">
-                                            <div class="if-second-card">
-                                                <h4><?php echo htmlspecialchars($prod['product']); ?></h4>
-                                                <h5>Stock: <?php echo htmlspecialchars($prod['quantity']); ?></h5>
-                                                <p>₱<?php echo number_format($prod['price'], 2); ?></p>
-                                            </div>
+                        <!-- data-id="<?= $prod['id']; ?>" -->
+                        <div class="card">
+                            <div class="item-description">
+                                <img src="assets/images/<?php echo htmlspecialchars($prod['image_filename']); ?>"
+                                    alt="picture" width="150" height="150">
+                                <div class="if-second-card">
+                                    <h4><?php echo htmlspecialchars($prod['product']); ?></h4>
+                                    <h5>Stock: <?php echo htmlspecialchars($prod['quantity']); ?></h5>
+                                    <p>₱<?php echo number_format($prod['price'], 2); ?></p>
+                                </div>
 
-                                        </div>
-
-                                        <form class="addToCartForm" action="" method="POST">
-                                            <input type="hidden" name="price"
-                                                value="<?php echo number_format($prod['price'], 2); ?>">
-                                            <input type="hidden" name="name"
-                                                value="<?php echo htmlspecialchars($prod['product']); ?>">
-                                            <div class="item-properties">
-                                                <div class="item-properties-card">
-                                                    <p class="title">
-                                                        Size
-                                                    </p>
-                                                    <div class="ip-variety">
-                                                        <label class="size-label">
-                                                            <input type="radio" name="size" placeholder="S" value="S" />
-                                                            <span>S</span>
-                                                        </label>
-                                                        <label class="size-label">
-                                                            <input type="radio" name="size" placeholder="M" value="M" />
-                                                            <span>M</span>
-                                                        </label>
-                                                        <label class="size-label">
-                                                            <input type="radio" name="size" placeholder="L" value="L" />
-                                                            <span>L</span>
-                                                        </label>
-                                                        <!-- <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'S', 25)">S</button>
-                                                        <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'M', 50)">M</button>
-                                                        <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'L', 100)">L</button> -->
-                                                        <!-- <button type="button" data-value="S">S</button>
-                                                    <button type="button" data-value="M">M</button>
-                                                    <button type="button" data-value="L">L</button> -->
-                                                    </div>
-                                                </div>
-
-                                                <div class="item-properties-card">
-                                                    <p class="title">
-                                                        Sugar (%)
-                                                    </p>
-                                                    <div class="ip-variety">
-                                                        <label class="sugar-label">
-                                                            <input type="radio" name="sugar" placeholder="25%" value="25">
-                                                            <span>25</span>
-                                                        </label>
-                                                        <label class="sugar-label">
-                                                            <input type="radio" name="sugar" placeholder="50%" value="50">
-                                                            <span>50</span>
-                                                        </label>
-                                                        <label class="sugar-label">
-                                                            <input type="radio" name="sugar" placeholder="100%" value="100">
-                                                            <span>100</span>
-                                                        </label>
-                                                        <!-- <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'S', 25)">25%</button>
-                                                        <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'M', 50)">50%</button>
-                                                        <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'L', 100)">100%</button> -->
-                                                        <!-- <button type="button" data-value="25">25</button>
-                                                    <button type="button" data-value="50">50</button>
-                                                    <button type="button" data-value="100">100</button> -->
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="button_itemProperties">
-                                                <button type="submit" name="addToCart">+ Add</button>
-                                                <!-- onclick="addToCart(<?= $prod['id']; ?>)"  -->
-                                                <!-- <button type="button" class="addBtn">+ Add</button> -->
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                <?php endwhile; ?>
                             </div>
 
-                            <!-- <?php else: ?>
+                            <form class="addToCartForm" action="" method="POST">
+                                <input type="hidden" name="price"
+                                    value="<?php echo number_format($prod['price'], 2); ?>">
+                                <input type="hidden" name="name"
+                                    value="<?php echo htmlspecialchars($prod['product']); ?>">
+                                <div class="item-properties">
+                                    <div class="item-properties-card">
+                                        <p class="title">
+                                            Size
+                                        </p>
+                                        <div class="ip-variety">
+                                            <label class="size-label">
+                                                <input type="radio" name="size" placeholder="S" value="S" />
+                                                <span>S</span>
+                                            </label>
+                                            <label class="size-label">
+                                                <input type="radio" name="size" placeholder="M" value="M" />
+                                                <span>M</span>
+                                            </label>
+                                            <label class="size-label">
+                                                <input type="radio" name="size" placeholder="L" value="L" />
+                                                <span>L</span>
+                                            </label>
+                                            <!-- <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'S', 25)">S</button>
+                                                        <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'M', 50)">M</button>
+                                                        <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'L', 100)">L</button> -->
+                                            <!-- <button type="button" data-value="S">S</button>
+                                                    <button type="button" data-value="M">M</button>
+                                                    <button type="button" data-value="L">L</button> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="item-properties-card">
+                                        <p class="title">
+                                            Sugar (%)
+                                        </p>
+                                        <div class="ip-variety">
+                                            <label class="sugar-label">
+                                                <input type="radio" name="sugar" placeholder="25%" value="25">
+                                                <span>25</span>
+                                            </label>
+                                            <label class="sugar-label">
+                                                <input type="radio" name="sugar" placeholder="50%" value="50">
+                                                <span>50</span>
+                                            </label>
+                                            <label class="sugar-label">
+                                                <input type="radio" name="sugar" placeholder="100%" value="100">
+                                                <span>100</span>
+                                            </label>
+                                            <!-- <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'S', 25)">25%</button>
+                                                        <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'M', 50)">50%</button>
+                                                        <button type="button" onclick="addToCart(<?= $prod['id']; ?>, 'L', 100)">100%</button> -->
+                                            <!-- <button type="button" data-value="25">25</button>
+                                                    <button type="button" data-value="50">50</button>
+                                                    <button type="button" data-value="100">100</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="button_itemProperties">
+                                    <button type="submit" name="addToCart">+ Add</button>
+                                    <!-- onclick="addToCart(<?= $prod['id']; ?>)"  -->
+                                    <!-- <button type="button" class="addBtn">+ Add</button> -->
+                                </div>
+                            </form>
+                        </div>
+
+                        <?php endwhile; ?>
+                    </div>
+
+                    <!-- <?php else: ?>
                                     <div class="card-container">
                                         <div class="no-selection-message">
                                             <h1>No products in this category.</h1>
