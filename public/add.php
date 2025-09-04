@@ -4,6 +4,7 @@ require_once("../src/controller/addController.php");
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@ require_once("../src/controller/addController.php");
     <link rel="stylesheet" href="../src/styles/global.css">
     <link rel="stylesheet" href="../src/styles/updateForm.css">
 </head>
+
 <body>
     <div class="container">
         <div class="add-container">
@@ -23,7 +25,7 @@ require_once("../src/controller/addController.php");
                 </a>
                 <h1>Inventory > Add Item</h1>
             </div>
-            <form action="" method="POST">
+            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                 <h1>
                     Add New Item
                 </h1>
@@ -61,10 +63,16 @@ require_once("../src/controller/addController.php");
                             <input type="number" name="quantity" step="0.01" required>
                         </div>
                         <div class="btns">
-                            <button class="cancel" type="button" onclick="window.location.href='inventory.php'">Cancel</button>
+                            <button class="cancel" type="button"
+                                onclick="window.location.href='inventory.php'">Cancel</button>
                             <button class="confirm" type="submit">Confirm</button>
                         </div>
-                    </div> </div> </form> </div> </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <script src="../src/js/index.js"></script>
 </body>
+
 </html>

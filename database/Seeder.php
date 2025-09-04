@@ -1,33 +1,33 @@
 <?php
 require_once __DIR__ . '/database.php';
 
-class Seeder {
+class Seeder
+{
     private $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         $dbConnection = new Database();
         $this->conn = $dbConnection->conn;
     }
 
-    private function runQuery($query, $successMessage) {
-        if (mysqli_query($this->conn, $query)) {
-            echo "✅ {$successMessage}\n";
-        } else {
-            echo "❌ Error: " . mysqli_error($this->conn) . "\n";
-        }
-    }
-
-    public function seedUsers() {
+    public function seedUsers()
+    {
         $query = "INSERT INTO users (name, email, password) VALUES
             ('Admin User', 'admin@example.com', '123456'),
             ('John Doe', 'john@example.com', 'password'),
             ('Jane Smith', 'jane@example.com', 'password123');";
 
-        $this->runQuery($query, "Users seeded successfully.");
+        if (mysqli_query($this->conn, $query)) {
+            echo "✅ Users seeded successfully.\n";
+        } else {
+            echo "❌ Error seeding users: " . mysqli_error($this->conn) . "\n";
+        }
     }
 
-    public function seedProducts() {
-        $query = "INSERT INTO products (id, name, category_id, price, stock, image) VALUES
+    public function seedProducts()
+    {
+        $query = "INSERT INTO products (id, product, categories_id, price, quantity, image_filename) VALUES
             (1, 'Caramel Macchiato', 2, 150.00, 10, 'caramel_macchiato.jpg'),
             (3, 'Cappucino', 2, 180.00, 10, 'cappuccino.jpg'),
             (4, 'Caffe Misto', 2, 120.00, 10, 'caffe_misto.jpg'),
@@ -42,11 +42,24 @@ class Seeder {
             (30, 'test', 2, 10.00, 12, 'test.jpg'),
             (31, 'test23', 2, 123.00, 12, 'test.jpg');";
 
-        $this->runQuery($query, "Products seeded successfully.");
+        if (mysqli_query($this->conn, $query)) {
+            echo "✅ Products seeded successfully.\n";
+        } else {
+            echo "❌ Error seeding products: " . mysqli_error($this->conn) . "\n";
+        }
+    }
+
+    public function seedCategories()
+    {
+        $query = "INSERT INTO categories (id, name) VALUES
+            (1, 'Cold Coffee'),
+            (2, 'Hot Coffee'),
+            (3, 'Non Coffee');";
+
+        if (mysqli_query($this->conn, $query)) {
+            echo "✅ Categories seeded successfully.\n";
+        } else {
+            echo "❌ Error seeding categories: " . mysqli_error($this->conn) . "\n";
+        }
     }
 }
-
-// Run the seeder
-$seeder = new Seeder();
-$seeder->seedUsers();
-$seeder->seedProducts();

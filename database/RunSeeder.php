@@ -4,5 +4,5 @@ require_once __DIR__ . '/Seeder.php';
 $seeder = new Seeder();
 
 // Call your seeders
-$seeder->seedUsers();
-// $seeder->seedProducts();
+$seeder->seedCategories();
+$seeder->seedProducts();
