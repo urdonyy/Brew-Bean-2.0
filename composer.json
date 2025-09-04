@@ -16,7 +16,9 @@
     "scripts": {
         "start:dev": "php -S localhost:8060",
         "migrate": "php database/RunMigration.php",
-        "seed": "php database/RunSeeder.php"
+        "rollback": "php database/RunRollback.php",
+        "seed": "php database/RunSeeder.php",
+        "db:fresh": "composer rollback && composer migrate"
 
     }
 }

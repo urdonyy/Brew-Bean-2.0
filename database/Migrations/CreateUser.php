@@ -1,6 +1,8 @@
 <?php
 
 require_once __DIR__ . '/../Migrations.php';
+
+require_once __DIR__ . '/../BluePrint.php';
 /*
 |---------------------------------------------
 | Sample User Migration
@@ -9,19 +11,22 @@ require_once __DIR__ . '/../Migrations.php';
 | Here is where you can define your migrations
 |
 */
-class CreateUser extends Migration {
-    public function up() {
-        $this->createTable([
-            'users' => [
-                'id' => 'int(11) NOT NULL AUTO_INCREMENT',
-                'name' => 'varchar(255) NOT NULL',
-                'email' => 'varchar(255) NOT NULL',
-                'password' => 'varchar(255) NOT NULL',
-            ]
-        ]);
+class CreateUser extends Migration
+{
+    public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('email')->unique('email');
+            $table->string('password');
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
+        });
     }
 
-    public function down() {
-        $this->dropTable('users');
+    public function down()
+    {
+        Schema::dropIfExists('users');
     }
 }
