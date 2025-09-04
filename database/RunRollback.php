@@ -1,20 +1,21 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// load Migration base class
-require_once __DIR__ . '/Migrations.php';
+// get all migrations
+$migrationFiles = glob(__DIR__ . '/Migrations/*.php');
+
+// sort alphabetically (numbers first)
+sort($migrationFiles);
 
 $migrations = [];
-foreach (glob(__DIR__ . '/Migrations/*.php') as $migrationFile) {
-    require_once $migrationFile;
 
-    // Class name = filename (no namespace)
-    $className = pathinfo($migrationFile, PATHINFO_FILENAME);
-
-    $migrations[] = $className;
+// require each file and collect the returned migration object
+foreach ($migrationFiles as $migrationFile) {
+    $migration = require $migrationFile; // returns the anonymous migration
+    $migrations[] = $migration;
 }
 
-foreach ($migrations as $migrationClass) {
-    $migration = new $migrationClass();
+// run them
+foreach ($migrations as $migration) {
     $migration->down();
 }
