@@ -342,7 +342,7 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
             <h2 class="bean">Brew & Bean</h2>
             
             <p>Address: 123 Lorem Ipsum, Makati City</p>
-            <p class="jollibee">Tel: 8-7000</p>
+            <p class="tel">Tel: 8-7000</p>
             
         <div class="summary">
             <p class ="paymentSum">PAYMENT SUMMARY</p>
@@ -359,7 +359,7 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
                     </thead>
 
                     <tbody class="tableBody">
-                        <tr>
+                        <!-- <tr>
                             <td>Kape</td>
                             <td>1</td>
                             <td>100.00</td>
@@ -378,7 +378,7 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
                             <td>Kape</td>
                             <td>1</td>
                             <td>100.00</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                     
                 </table>
@@ -389,7 +389,8 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
         </div>
 
             <div class="barcodeImg">
-            <img src="barcode.gif" alt="bar code"> </div>
+            <img src="./assets/images/barcode.gif" alt="bar code"> </div>
+            
         </div>
     </div>   
     </div>

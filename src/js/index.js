@@ -3,6 +3,10 @@
 //     document.getElementById(formId).classList.add("active");
 // }
 
+function $(selector) {
+  return document.querySelector(selector);
+}
+
 //=============================
 //initialize cart from localStorage
 //=============================
@@ -10,6 +14,7 @@ let itemsInCart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
 //select the container where cart items will be displayed
 const orderItems = document.querySelector(".orderItems");
+// const orderItemss = $('.orderItems');
 // orderItems.innerHTML = `hello world`; --test line
 
 //=============================
@@ -202,22 +207,38 @@ function attachCartEvents() {
 //=============================
 //handle add-to-cart form submission
 //=============================
+
 document.querySelectorAll(".addToCartForm").forEach((form) => {
   form.addEventListener("submit", function (event) {
     event.preventDefault(); //stop page reload
 
     //collect form data
     let formData = new FormData(event.target);
-    console.log(formData.get("size"), formData.get("sugar"));
+
+    // console.log(formData.get("size"), formData.get("sugar"));
+    const name = formData.get("name");
+    const size = formData.get("size") ?? "S";
+    const sugar = formData.get("sugar") ?? "25";
+
+    let existingInCart = itemsInCart.findIndex(
+      (cart) => cart.name == name && cart.sugar == sugar && cart.size == size
+    );
+
+    if (existingInCart !== -1) {
+      const item = itemsInCart[existingInCart];
+
+      item.quantity++;
+    } else {
+      itemsInCart.push({
+        name: formData.get("name"),
+        price: formData.get("price"),
+        size: formData.get("size") ?? "S",
+        sugar: formData.get("sugar") ?? "25",
+        quantity: 1,
+      });
+    }
 
     //push new item to cart array
-    itemsInCart.push({
-      // id: Date.now(),
-      name: formData.get("name"),
-      price: formData.get("price"),
-      size: formData.get("size"),
-      sugar: formData.get("sugar"),
-    });
 
     //save updated cart to localstorage
     localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
@@ -233,8 +254,62 @@ document.querySelectorAll(".addToCartForm").forEach((form) => {
 
 // I-COMMENT KO MUNA SIGER
 
-let mowdal = document.querySelector(".modal");
-let receipt = document.querySelector(".receiptPrint");
+// computation for total
+const receiptBody = $(".tableBody");
+const deliveryFeeEl = $(".sf");
+const totalEl = $(".total");
+
+// formatter for php sign
+const currencyFormatter = new Intl.NumberFormat("ph", {
+  style: "currency",
+  currency: "PHP",
+});
+
+function renderReceipt() {
+  // set the content of receipt to empty
+  receiptBody.innerHTML = "";
+
+  // get the item that's stored in cart from localstorage
+  let items = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  // para ka klang nagi-index array,,, same concept
+  let total = items.reduce((accumulator, curr) => {
+    const quantity = curr.quantity || 1;
+    let itemPrice = parseFloat(curr.price);
+    return accumulator + parseFloat(quantity * itemPrice);
+  }, 0);
+
+  let deliveryFee = 50;
+
+  let html = "";
+
+  items.map((item) => {
+    const quantity = item.quantity || 1;
+    const price = parseFloat(item.price.replace(",", ""));
+
+    html += `<tr>
+   <td>${item.name}</td>
+      <td>${quantity}</td>
+      <td>${currencyFormatter.format(total)}</td>
+    </tr> 
+    `;
+  });
+
+  receiptBody.insertAdjacentHTML("afterbegin", html);
+  const formattedDF = currencyFormatter.format(deliveryFee);
+  deliveryFeeEl.textContent = `Delivery Fee: ${formattedDF}`;
+  const vat = total * 0.12;
+
+  const finalTotal = total + vat + deliveryFee;
+
+  const formtattedTotal = currencyFormatter.format(finalTotal);
+  totalEl.textContent = `Total: ${formtattedTotal}`;
+}
+
+// modal section
+
+let mowdal = $(".modal");
+let receipt = $(".receiptPrint");
 
 function showModal(x) {
   const action = x ? "add" : "remove";
@@ -247,16 +322,20 @@ closeBtn.addEventListener("click", function (e) {
 
 let printRcpt = document.querySelector(".print");
 printRcpt.addEventListener("click", function (event) {
-  //prnt rcpt btn is clicked while no itemsincart show alert
+  //alert is shown if there's no item in cart
   if (itemsInCart.length === 0) {
     alert("No orders to print.");
     return;
   }
+
+  renderReceipt();
   showModal(true);
+
   //clear cart
   itemsInCart = [];
+
   //remove from localstorage
-  localStorage.removeItem("cartItems")
+  localStorage.removeItem("cartItems");
 
   //clear checked inputs (radio)
   document.querySelectorAll(".addToCartForm").forEach((form) => {
@@ -272,19 +351,5 @@ printRcpt.addEventListener("click", function (event) {
 //initial render when page loads
 
 renderCartItems();
-//
+
 attachCartEvents();
-
-// const d = document
-
-// d.querySelector('.increase').addEventListener('click', (e) => {
-//     console.log(e)
-// })
-
-// function addValue() {
-//     console.log('test')
-// }
-
-// const addValue = () => {
-//     console.log('test')
-// }
