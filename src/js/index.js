@@ -14,10 +14,7 @@ let itemsInCart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
 //select the container where cart items will be displayed
 const orderItems = document.querySelector(".orderItems");
-<<<<<<< Updated upstream
 // const orderItemss = $('.orderItems');
-=======
->>>>>>> Stashed changes
 // orderItems.innerHTML = `hello world`; --test line
 
 //=============================
@@ -210,7 +207,6 @@ function attachCartEvents() {
 //=============================
 //handle add-to-cart form submission
 //=============================
-<<<<<<< Updated upstream
 
 document.querySelectorAll(".addToCartForm").forEach((form) => {
   form.addEventListener("submit", function (event) {
@@ -243,24 +239,6 @@ document.querySelectorAll(".addToCartForm").forEach((form) => {
     }
 
     //push new item to cart array
-=======
-document.querySelectorAll(".addToCartForm").forEach((form) => {
-  form.addEventListener("submit", function (event) {
-    event.preventDefault(); //stop page reload
-
-    //collect form data
-    let formData = new FormData(event.target);
-    console.log(formData.get("size"), formData.get("sugar"));
-
-    //push new item to cart array
-    itemsInCart.push({
-      // id: Date.now(),
-      name: formData.get("name"),
-      price: formData.get("price"),
-      size: formData.get("size"),
-      sugar: formData.get("sugar"),
-    });
->>>>>>> Stashed changes
 
     //save updated cart to localstorage
     localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
@@ -273,7 +251,6 @@ document.querySelectorAll(".addToCartForm").forEach((form) => {
 //=============================
 //handle print receipt button
 //=============================
-<<<<<<< Updated upstream
 
 // I-COMMENT KO MUNA SIGER
 
@@ -346,17 +323,11 @@ closeBtn.addEventListener("click", function (e) {
 let printRcpt = document.querySelector(".print");
 printRcpt.addEventListener("click", function (event) {
   //alert is shown if there's no item in cart
-=======
-let printRcpt = document.querySelector(".print");
-printRcpt.addEventListener("click", function (event) {
-  //prnt rcpt btn is clicked while no itemsincart show alert
->>>>>>> Stashed changes
   if (itemsInCart.length === 0) {
     alert("No orders to print.");
     return;
   }
 
-<<<<<<< Updated upstream
   renderReceipt();
   showModal(true);
 
@@ -376,41 +347,9 @@ printRcpt.addEventListener("click", function (event) {
 });
 
 // I-COMMENT KO MUNA
-=======
-  //clear cart
-  itemsInCart = [];
-  //remove from localstorage
-  localStorage.removeItem("cartItems");
-
-  //clear checked inputs (radio)
-  document.querySelectorAll(".addToCartForm").forEach((form) => {
-    form.reset();
-  });
-
-  alert("Receipt Printed.");
-  renderCartItems();
-});
->>>>>>> Stashed changes
 
 //initial render when page loads
 
 renderCartItems();
 
 attachCartEvents();
-<<<<<<< Updated upstream
-=======
-
-// const d = document
-
-// d.querySelector('.increase').addEventListener('click', (e) => {
-//     console.log(e)
-// })
-
-// function addValue() {
-//     console.log('test')
-// }
-
-// const addValue = () => {
-//     console.log('test')
-// }
->>>>>>> Stashed changes
