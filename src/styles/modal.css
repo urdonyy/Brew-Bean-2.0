@@ -1,0 +1,129 @@
+.modal {
+  margin: auto;
+  border: 1px solid;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: none;
+}
+
+.modalContent {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: fixed;
+  /* text-align: center; */
+  color: black;
+  padding-top: 20px;
+  margin: 5px;
+  width: 400px;
+  max-height: 90dvh;
+}
+
+.modalContent p {
+  margin-bottom: 10px;
+}
+.tel {
+  margin-top: 0;
+}
+.brew {
+  padding-top: 10px;
+  font-size: 30px;
+}
+
+.bean {
+  font-weight: normal;
+  margin: 0;
+}
+
+.paymentSum {
+  align-self: flex-start;
+  margin-bottom: 2px;
+  padding: 10px;
+}
+
+.table {
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+.tableContainer {
+  border-collapse: collapse;
+  width: 340px;
+  align-items: center;
+}
+
+.tableHead tr th {
+  font-weight: normal;
+  opacity: 80%;
+  font-size: 12px;
+  padding: 10px;
+}
+
+.tableBody tr td {
+  padding: 7px;
+  text-align: center;
+}
+
+/* .tableBody tr:last-of-type {
+  border-bottom: 1px solid #212121;
+} */
+
+.sf {
+  border-top: 1px solid #212121;
+  align-self: flex-start;
+  padding: 10px;
+  width: 100%;
+}
+
+.total {
+  font-size: 24px;
+  font-weight: bold;
+  align-self: flex-start;
+  padding: 10px;
+}
+
+.barcodeImg img {
+  height: 75px;
+  width: auto;
+  margin-top: 10px;
+  border-style: none;
+}
+
+.closeBtn {
+  align-self: flex-end;
+  margin: 5px;
+  padding-right: 10px;
+  /* animation: bounce 1s infinite; */
+}
+
+.active {
+  display: flex;
+  /* overflow: scroll; */
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  overflow-y: hidden;
+}
+
+/* 
+@keyframes bounce {
+    -50% {
+        transform: translateX(50%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+} */

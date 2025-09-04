@@ -3,34 +3,42 @@
 //     document.getElementById(formId).classList.add("active");
 // }
 
+function $(selector) {
+  return document.querySelector(selector);
+}
+
 //=============================
 //initialize cart from localStorage
 //=============================
 let itemsInCart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
 //select the container where cart items will be displayed
-const orderItems = document.querySelector('.orderItems');
+const orderItems = document.querySelector(".orderItems");
+<<<<<<< Updated upstream
+// const orderItemss = $('.orderItems');
+=======
+>>>>>>> Stashed changes
 // orderItems.innerHTML = `hello world`; --test line
 
 //=============================
 //function: Render all cart items in the DOM
 //=============================
 function renderCartItems() {
-    //clear previous cart HTML 
-    orderItems.innerHTML = ``; /*safe*/
+  //clear previous cart HTML
+  orderItems.innerHTML = ``; /*safe*/
 
-    //if cart is empty, show "No items"
-    if (itemsInCart.length === 0) {
-        orderItems.innerHTML = `
+  //if cart is empty, show "No items"
+  if (itemsInCart.length === 0) {
+    orderItems.innerHTML = `
                 <div class="noItemInCart"><p>No Items in Cart.</p></div>
                 `;
-        updateBillingSummary();
-        return;
-    }
+    updateBillingSummary();
+    return;
+  }
 
-    //loop through cart items and display them
-    itemsInCart.forEach((item, index) => {
-        orderItems.innerHTML += /*html*/`
+  //loop through cart items and display them
+  itemsInCart.forEach((item, index) => {
+    orderItems.innerHTML += /*html*/ `
                 <div class="cartContainer">
                     <div class="leftPartitionCart">
                         <div class="coffeeName">
@@ -81,169 +89,316 @@ function renderCartItems() {
                     </div>
                 </div>
                 `;
-    })
+  });
 
-    attachCartEvents();
-    updateBillingSummary();
+  attachCartEvents();
+  updateBillingSummary();
 }
 
 function updateBillingSummary() {
-    let subtotal = 0;
+  let subtotal = 0;
 
-    itemsInCart.forEach(item => {
-        let formattedPrice = item.price.replace(",", "");
-        subtotal += parseFloat(formattedPrice) * (item.quantity || 1);
-    });
+  itemsInCart.forEach((item) => {
+    let formattedPrice = item.price.replace(",", "");
+    subtotal += parseFloat(formattedPrice) * (item.quantity || 1);
+  });
 
-    let discount = 0; //static muna (WIP)
-    let vat = (subtotal - discount) * 0.12;
-    let total = subtotal - discount + vat;
+  let discount = 0; //static muna (WIP)
+  let vat = (subtotal - discount) * 0.12;
+  let total = subtotal - discount + vat;
 
-    const minMaxFractionDigits = {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    }
+  const minMaxFractionDigits = {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  };
 
-    document.getElementById('subtotal').textContent = subtotal.toLocaleString("en-US", minMaxFractionDigits);
-    document.getElementById('discount').textContent = discount.toLocaleString("en-US", minMaxFractionDigits);
-    document.getElementById('vat').textContent = vat.toLocaleString("en-US", minMaxFractionDigits);
-    document.getElementById('total').textContent = total.toLocaleString("en-US", minMaxFractionDigits);
+  document.getElementById("subtotal").textContent = subtotal.toLocaleString(
+    "en-US",
+    minMaxFractionDigits
+  );
+  document.getElementById("discount").textContent = discount.toLocaleString(
+    "en-US",
+    minMaxFractionDigits
+  );
+  document.getElementById("vat").textContent = vat.toLocaleString(
+    "en-US",
+    minMaxFractionDigits
+  );
+  document.getElementById("total").textContent = total.toLocaleString(
+    "en-US",
+    minMaxFractionDigits
+  );
 }
 
 //rightPartition shows/hide
 function attachCartEvents() {
-    document.querySelectorAll(".cartContainer").forEach((cartItem, index) => {
-        const deleteBtn = cartItem.querySelector(".deleteBtn");
-        const confirmBtn = cartItem.querySelector(".confirmDelete");
-        const cancelBtn = cartItem.querySelector(".cancelDelete");
+  document.querySelectorAll(".cartContainer").forEach((cartItem, index) => {
+    const deleteBtn = cartItem.querySelector(".deleteBtn");
+    const confirmBtn = cartItem.querySelector(".confirmDelete");
+    const cancelBtn = cartItem.querySelector(".cancelDelete");
 
-        deleteBtn.addEventListener("click", () => {
-            cartItem.classList.add("showDeleteConfirm");
-        });
-
-        confirmBtn.addEventListener("click", () => {
-            itemsInCart.splice(index, 1);
-            localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
-            attachCartEvents();
-            renderCartItems();
-        });
-
-        cancelBtn.addEventListener("click", () => {
-            cartItem.classList.remove("showDeleteConfirm");
-        });
+    deleteBtn.addEventListener("click", () => {
+      cartItem.classList.add("showDeleteConfirm");
     });
 
-    //for qntity input billing summary update
-    document.querySelectorAll('.qtyInput').forEach(input => {
-        input.addEventListener('change', () => {
-            let index = input.dataset.index;
-            let newQty = parseInt(input.value);
-
-            if (!input.value || isNaN(newQty) || newQty < 1) {
-                newQty = 1;
-                input.value = 1;
-            }
-
-            itemsInCart[index].quantity = newQty;
-            localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
-            updateBillingSummary();
-        });
+    confirmBtn.addEventListener("click", () => {
+      itemsInCart.splice(index, 1);
+      localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
+      attachCartEvents();
+      renderCartItems();
     });
 
-    //quantity controls (+ / - btns)
-    document.querySelectorAll(".cartContainer").forEach((cartItem, index) => {
-        const qtyInput = cartItem.querySelector(".qtyInput");
-        const increaseBtn = cartItem.querySelector(".increase");
-        const decreaseBtn = cartItem.querySelector(".decrease");
-
-        //get current qty value or default to 1 if invalid
-        const getQty = () => {
-            let val = parseInt(qtyInput.value);
-            return isNaN(val) || val < 1 ? 1 : val;
-        };
-
-        //increase
-        increaseBtn.addEventListener("click", () => {
-            let currentQty = getQty();
-            let newQty = currentQty + 1;
-            // qtyInput.value = parseInt(qtyInput.value) + 1;
-            qtyInput.value = newQty;
-            itemsInCart[index].quantity = parseInt(qtyInput.value);
-            localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
-            updateBillingSummary();
-        });
-
-        //decrease
-        decreaseBtn.addEventListener("click", () => {
-            let currentQty = getQty();
-            let newQty = currentQty - 1;
-            // let newQty = parseInt(qtyInput.value) - 1;
-            if (newQty < 1) newQty = 1; //prevent 0 or negative
-            qtyInput.value = newQty;
-            itemsInCart[index].quantity = newQty;
-            localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
-            updateBillingSummary();
-        });
+    cancelBtn.addEventListener("click", () => {
+      cartItem.classList.remove("showDeleteConfirm");
     });
+  });
+
+  //for qntity input billing summary update
+  document.querySelectorAll(".qtyInput").forEach((input) => {
+    input.addEventListener("change", () => {
+      let index = input.dataset.index;
+      let newQty = parseInt(input.value);
+
+      if (!input.value || isNaN(newQty) || newQty < 1) {
+        newQty = 1;
+        input.value = 1;
+      }
+
+      itemsInCart[index].quantity = newQty;
+      localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
+      updateBillingSummary();
+    });
+  });
+
+  //quantity controls (+ / - btns)
+  document.querySelectorAll(".cartContainer").forEach((cartItem, index) => {
+    const qtyInput = cartItem.querySelector(".qtyInput");
+    const increaseBtn = cartItem.querySelector(".increase");
+    const decreaseBtn = cartItem.querySelector(".decrease");
+
+    //get current qty value or default to 1 if invalid
+    const getQty = () => {
+      let val = parseInt(qtyInput.value);
+      return isNaN(val) || val < 1 ? 1 : val;
+    };
+
+    //increase
+    increaseBtn.addEventListener("click", () => {
+      let currentQty = getQty();
+      let newQty = currentQty + 1;
+      // qtyInput.value = parseInt(qtyInput.value) + 1;
+      qtyInput.value = newQty;
+      itemsInCart[index].quantity = parseInt(qtyInput.value);
+      localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
+      updateBillingSummary();
+    });
+
+    //decrease
+    decreaseBtn.addEventListener("click", () => {
+      let currentQty = getQty();
+      let newQty = currentQty - 1;
+      // let newQty = parseInt(qtyInput.value) - 1;
+      if (newQty < 1) newQty = 1; //prevent 0 or negative
+      qtyInput.value = newQty;
+      itemsInCart[index].quantity = newQty;
+      localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
+      updateBillingSummary();
+    });
+  });
 }
 
 //=============================
 //handle add-to-cart form submission
 //=============================
-document.querySelectorAll(".addToCartForm").forEach(form => {
-    form.addEventListener("submit", function (event) {
-        event.preventDefault(); //stop page reload
+<<<<<<< Updated upstream
 
-        //collect form data
-        let formData = new FormData(event.target);
-        console.log(formData.get("size"), formData.get("sugar"));
+document.querySelectorAll(".addToCartForm").forEach((form) => {
+  form.addEventListener("submit", function (event) {
+    event.preventDefault(); //stop page reload
 
-        //push new item to cart array
-        itemsInCart.push({
-            // id: Date.now(),
-            name: formData.get("name"),
-            price: formData.get("price"),
-            size: formData.get("size"),
-            sugar: formData.get("sugar"),
-        })
+    //collect form data
+    let formData = new FormData(event.target);
 
-        //save updated cart to localstorage
-        localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
+    // console.log(formData.get("size"), formData.get("sugar"));
+    const name = formData.get("name");
+    const size = formData.get("size") ?? "S";
+    const sugar = formData.get("sugar") ?? "25";
 
-        //re-render cart
-        renderCartItems();
+    let existingInCart = itemsInCart.findIndex(
+      (cart) => cart.name == name && cart.sugar == sugar && cart.size == size
+    );
+
+    if (existingInCart !== -1) {
+      const item = itemsInCart[existingInCart];
+
+      item.quantity++;
+    } else {
+      itemsInCart.push({
+        name: formData.get("name"),
+        price: formData.get("price"),
+        size: formData.get("size") ?? "S",
+        sugar: formData.get("sugar") ?? "25",
+        quantity: 1,
+      });
+    }
+
+    //push new item to cart array
+=======
+document.querySelectorAll(".addToCartForm").forEach((form) => {
+  form.addEventListener("submit", function (event) {
+    event.preventDefault(); //stop page reload
+
+    //collect form data
+    let formData = new FormData(event.target);
+    console.log(formData.get("size"), formData.get("sugar"));
+
+    //push new item to cart array
+    itemsInCart.push({
+      // id: Date.now(),
+      name: formData.get("name"),
+      price: formData.get("price"),
+      size: formData.get("size"),
+      sugar: formData.get("sugar"),
     });
+>>>>>>> Stashed changes
+
+    //save updated cart to localstorage
+    localStorage.setItem("cartItems", JSON.stringify(itemsInCart));
+
+    //re-render cart
+    renderCartItems();
+  });
 });
 
 //=============================
 //handle print receipt button
 //=============================
-let printRcpt = document.querySelector(".print")
+<<<<<<< Updated upstream
+
+// I-COMMENT KO MUNA SIGER
+
+// computation for total
+const receiptBody = $(".tableBody");
+const deliveryFeeEl = $(".sf");
+const totalEl = $(".total");
+
+// formatter for php sign
+const currencyFormatter = new Intl.NumberFormat("ph", {
+  style: "currency",
+  currency: "PHP",
+});
+
+function renderReceipt() {
+  // set the content of receipt to empty
+  receiptBody.innerHTML = "";
+
+  // get the item that's stored in cart from localstorage
+  let items = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  // para ka klang nagi-index array,,, same concept
+  let total = items.reduce((accumulator, curr) => {
+    const quantity = curr.quantity || 1;
+    let itemPrice = parseFloat(curr.price);
+    return accumulator + parseFloat(quantity * itemPrice);
+  }, 0);
+
+  let deliveryFee = 50;
+
+  let html = "";
+
+  items.map((item) => {
+    const quantity = item.quantity || 1;
+    const price = parseFloat(item.price.replace(",", ""));
+
+    html += `<tr>
+   <td>${item.name}</td>
+      <td>${quantity}</td>
+      <td>${currencyFormatter.format(total)}</td>
+    </tr> 
+    `;
+  });
+
+  receiptBody.insertAdjacentHTML("afterbegin", html);
+  const formattedDF = currencyFormatter.format(deliveryFee);
+  deliveryFeeEl.textContent = `Delivery Fee: ${formattedDF}`;
+  const vat = total * 0.12;
+
+  const finalTotal = total + vat + deliveryFee;
+
+  const formtattedTotal = currencyFormatter.format(finalTotal);
+  totalEl.textContent = `Total: ${formtattedTotal}`;
+}
+
+// modal section
+
+let mowdal = $(".modal");
+let receipt = $(".receiptPrint");
+
+function showModal(x) {
+  const action = x ? "add" : "remove";
+  mowdal.classList[action]("active");
+}
+let closeBtn = document.querySelector(".closeBtn");
+closeBtn.addEventListener("click", function (e) {
+  showModal(false);
+});
+
+let printRcpt = document.querySelector(".print");
 printRcpt.addEventListener("click", function (event) {
-    //prnt rcpt btn is clicked while no itemsincart show alert
-    if (itemsInCart.length === 0) {
-        alert("No orders to print.")
-        return;
-    }
+  //alert is shown if there's no item in cart
+=======
+let printRcpt = document.querySelector(".print");
+printRcpt.addEventListener("click", function (event) {
+  //prnt rcpt btn is clicked while no itemsincart show alert
+>>>>>>> Stashed changes
+  if (itemsInCart.length === 0) {
+    alert("No orders to print.");
+    return;
+  }
 
-    //clear cart
-    itemsInCart = [];
-    //remove from localstorage
-    localStorage.removeItem("cartItems")
+<<<<<<< Updated upstream
+  renderReceipt();
+  showModal(true);
 
-    //clear checked inputs (radio)
-    document.querySelectorAll(".addToCartForm").forEach(form => {
-        form.reset();
-    });
+  //clear cart
+  itemsInCart = [];
 
-    alert("Receipt Printed.");
-    renderCartItems();
-})
+  //remove from localstorage
+  localStorage.removeItem("cartItems");
+
+  //clear checked inputs (radio)
+  document.querySelectorAll(".addToCartForm").forEach((form) => {
+    form.reset();
+  });
+
+  // alert("Receipt Printed.");
+  renderCartItems();
+});
+
+// I-COMMENT KO MUNA
+=======
+  //clear cart
+  itemsInCart = [];
+  //remove from localstorage
+  localStorage.removeItem("cartItems");
+
+  //clear checked inputs (radio)
+  document.querySelectorAll(".addToCartForm").forEach((form) => {
+    form.reset();
+  });
+
+  alert("Receipt Printed.");
+  renderCartItems();
+});
+>>>>>>> Stashed changes
 
 //initial render when page loads
+
 renderCartItems();
-//
+
 attachCartEvents();
+<<<<<<< Updated upstream
+=======
 
 // const d = document
 
@@ -258,3 +413,4 @@ attachCartEvents();
 // const addValue = () => {
 //     console.log('test')
 // }
+>>>>>>> Stashed changes

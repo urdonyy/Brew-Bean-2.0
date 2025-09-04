@@ -1,7 +1,8 @@
-<?php 
+<?php
 session_start();
 
-class Database {
+class Database
+{
 
     private $_host = "localhost";
     private $_root = "root";
@@ -10,17 +11,21 @@ class Database {
     public $conn;
 
     // Connection to database 
-    public function __construct() {
+    public function __construct()
+    {
         $this->conn = new mysqli(
-            $this->_host, 
-            $this->_root, 
-            $this->_password, 
+            $this->_host,
+            $this->_root,
+            $this->_password,
             $this->_database
         );
         if ($this->conn->connect_error) {
-            die("Connection Failed: " . $this->conn->connect_error);        
+            die("Connection Failed: " . $this->conn->connect_error);
         }
     }
 
+    public function getConnection()
+    {
+        return $this->conn;
+    }
 }
-?>
