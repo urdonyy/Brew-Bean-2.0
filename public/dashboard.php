@@ -211,7 +211,7 @@ require_once("../src/controller/controller.php");
                                 <h4>Available Stocks:</h4>
                                 <p>20</p>
                             </div>
-                            <div class="bestSellingItemContent">
+                            <div class="bestSellingItemContentLwr">
                                 <h4>Total Orders:</h4>
                                 <p>100</p>
                             </div>
@@ -296,10 +296,10 @@ require_once("../src/controller/controller.php");
 
                             foreach ($orders as $order): ?>
                                 <tr>
-                                    <td><?= htmlspecialchars($order['order_id']) ?></td>
-                                    <td><?= htmlspecialchars($order['customer_name']) ?></td>
-                                    <td><?= htmlspecialchars($order['price']) ?></td>
-                                    <td><?= htmlspecialchars($order['date']) ?></td>
+                                    <td><span class="tdText"><?= htmlspecialchars($order['order_id']) ?></span></td>
+                                    <td><span class="tdText"><?= htmlspecialchars($order['customer_name']) ?></span></td>
+                                    <td><span class="tdText"><?= htmlspecialchars($order['price']) ?></span></td>
+                                    <td><span class="tdText"><?= htmlspecialchars($order['date']) ?></span></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
