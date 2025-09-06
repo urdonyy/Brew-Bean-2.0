@@ -43,13 +43,17 @@
 
 /* kapag active ang header */
 .category_header .header.active {
-  background: #f3dec3;
+  /* background: #f3dec3;
   color: #39261f;
-  border: 1px solid #f3dec3;
+  border: 1px solid #f3dec3; */
+  background: var(--primary-color);
+  color: #fff;
+  border: 1px solid var(--primary-color);
 }
 
 .category_header .header.active svg {
-  background: #f3dec3;
+  /* background: #f3dec3; */
+  background: var(--primary-color);
   border: none;
   border-radius: 5px;
   padding: 5px 10px 5px 10px;
@@ -59,16 +63,19 @@
 
 .category_header .header.active svg path {
   transition: 0.2s ease-in-out;
-  fill: #39261f;
+  /* fill: #39261f; */
+  fill: #fff;
 }
 
 .category_header .header.active:hover svg {
-  background: #f3dec3;
+  /* background: #f3dec3; */
+  background: var(--primary-color);
 }
 
 /* kung ano ang logic, dapat 'yung ang kabitan */
 .category_header .header.active:hover svg path {
-  fill: #39261f;
+  /* fill: #39261f; */
+  fill: #fff;
 }
 
 .category_header {
@@ -104,19 +111,24 @@ a.header {
 
 /* hover sa background ng header */
 .header:hover {
-  background: var(--tertiary-color);
-  border: 1px solid #39261f;
-  color: #ffffff;
+  /* background: var(--tertiary-color); */
+  /* border: 1px solid #39261f; */
+  /* color: #ffffff; */
+  background: #f3dec3;
+  border: 1px solid #f3dec3;
+  color: #39261f;
 }
 
 /* hover para kasama background ng icon */
 .category_header .header:hover svg {
-  background: var(--tertiary-color);
+  /* background: var(--tertiary-color); */
+  background: #f3dec3;
 }
 
 /* hover para kasama kulay ng icon */
 .category_header .header:hover svg path {
-  fill: #ffffff;
+  /* fill: #ffffff; */
+  fill: #39261f;
 }
 
 /* Container for cards */
@@ -914,5 +926,3 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-
