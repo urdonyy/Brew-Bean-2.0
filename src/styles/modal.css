@@ -53,12 +53,11 @@
 .table {
   flex: 1 1 auto;
   overflow-y: auto;
-}
+} 
 
 .tableContainer {
   border-collapse: collapse;
   width: 340px;
-  align-items: center;
 }
 
 .tableHead tr th {
@@ -68,9 +67,17 @@
   padding: 10px;
 }
 
+.tableHead th {
+  vertical-align: baseline;
+}
+
+.tableBody td {
+  vertical-align: baseline;
+}
+
 .tableBody tr td {
   padding: 7px;
-  text-align: center;
+  text-align: left
 }
 
 /* .tableBody tr:last-of-type {

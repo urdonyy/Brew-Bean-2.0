@@ -394,7 +394,6 @@ if (!isset($_GET['category']) || $_GET['category'] === '') {
         </div>
     </div>   
     </div>
-    <!-- <script src="modal.js"></script> -->
     <script src="../src/js/index.js"></script>
     <script src="../src/js/printModal.js"></script>
 </body>

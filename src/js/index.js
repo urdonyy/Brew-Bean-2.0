@@ -271,7 +271,7 @@ function renderReceipt() {
 
   // get the item that's stored in cart from localstorage
   let items = JSON.parse(localStorage.getItem("cartItems")) || [];
-
+  
   // para ka klang nagi-index array,,, same concept
   let total = items.reduce((accumulator, curr) => {
     const quantity = curr.quantity || 1;
@@ -285,12 +285,12 @@ function renderReceipt() {
 
   items.map((item) => {
     const quantity = item.quantity || 1;
-    const price = parseFloat(item.price.replace(",", ""));
-
+    let price = parseFloat(item.price.replace(",", ""));
+    price *= quantity
     html += `<tr>
    <td>${item.name}</td>
       <td>${quantity}</td>
-      <td>${currencyFormatter.format(total)}</td>
+      <td>${currencyFormatter.format(price)}</td>
     </tr> 
     `;
   });
@@ -310,7 +310,7 @@ function renderReceipt() {
 
 let mowdal = $(".modal");
 let receipt = $(".receiptPrint");
-
+let cloneCarts = [];
 function showModal(x) {
   const action = x ? "add" : "remove";
   mowdal.classList[action]("active");
@@ -318,6 +318,7 @@ function showModal(x) {
 let closeBtn = document.querySelector(".closeBtn");
 closeBtn.addEventListener("click", function (e) {
   showModal(false);
+  localStorage.removeItem("cartItems");
 });
 
 let printRcpt = document.querySelector(".print");
@@ -330,13 +331,13 @@ printRcpt.addEventListener("click", function (event) {
 
   renderReceipt();
   showModal(true);
-
+  cloneCarts = itemsInCart
   //clear cart
   itemsInCart = [];
 
   //remove from localstorage
-  localStorage.removeItem("cartItems");
 
+  // alert("lol");
   //clear checked inputs (radio)
   document.querySelectorAll(".addToCartForm").forEach((form) => {
     form.reset();
